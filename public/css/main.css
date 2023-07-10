@@ -1,0 +1,145 @@
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/inter-v12-latin-regular.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    src: url('../fonts/inter-v12-latin-600.woff2') format('woff2');
+}
+
+:root {
+    /*Light Mode*/
+    --light: hsl(82, 58%, 90%);
+    --white: hsl(0, 0%, 100%);
+
+    --light-green: #a7cab1;
+    --purple: hsl(263, 12%, 53%);
+    --dark-purple: hsl(300, 66%, 12%);
+    --black: hsl(0, 0%, 0%);
+
+    --light-red: hsl(0, 100%, 77%);
+    --red: hsl(0, 100%, 33%);
+
+    /*Dark Mode*/
+
+    --beige: hsl(43, 10%, 73%);
+    --gray: hsl(0, 2%, 49%);
+    --middle-black: hsl(330, 2%, 24%);
+    --light-black: hsl(330, 2%, 19%);
+}
+
+body{
+    font-family: 'Inter';
+    background-color: var(--light);
+}
+
+section{
+    display: flex;
+    flex-direction: column;
+    margin-top: 9rem;
+}
+
+ul{
+    list-style: none;
+    padding: 0rem;
+    margin: 0rem;
+}
+
+h3{
+    color: var(--purple);
+    text-transform: uppercase;
+}
+
+main{
+    display: flex;
+    width: auto;
+}
+
+h1{
+    text-transform: uppercase;
+    color: var(--purple);
+    margin: 0.5rem;
+}
+
+a{
+    text-decoration: none;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+button {
+    width:auto;
+    height: 2rem;
+    background-color: transparent;
+    margin: 0.5rem;
+    color: var(--purple);
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0.1rem solid var(--purple);
+    border-radius: 0.1rem;
+    padding: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+button:hover{
+    background-color: var(--purple);
+    color: var(--white);
+    transform: scale(1.1);
+}
+
+
+/*Navigation Reader*/
+
+.navbar{
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0rem;
+    width: 100%;
+    backdrop-filter: blur(10px);
+    justify-content: space-between;
+    padding: 0.5rem;
+    background-color: rgba(255,255,255,0.13);
+    & ul{
+        display: flex;
+        & li a{
+        margin: 0.5rem;
+        color: var(--dark-purple);
+        font-weight: 600;
+        }
+        & li a:hover{
+            color: var(--purple);
+        }
+    }
+    & .log_reg{
+        display: flex;
+    }
+    & .logo a {
+        display: flex;
+        align-items: center;
+        color: var(--purple);
+    & .name-logo{
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin: 0.5rem;
+    }
+    }
+    & .right-side{
+        display: flex;
+        align-items: center;
+    }
+}
+

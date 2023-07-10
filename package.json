@@ -1,0 +1,48 @@
+{
+  "name": "project-spotify",
+  "version": "1.0.0",
+  "description": "Music application, Spotify lookalike",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon ./src/app.js --config nodemon.json",
+    "seed": "node ./src/database/seeders/seeder.js",
+    "test": "cross-env NODE_ENV=test node --experimental-vm-modules ./node_modules/jest/bin/jest.js --coverage"
+  },
+  "keywords": [
+    "Music",
+    "Administration",
+    "Artist",
+    "Song",
+    "ExpressJS",
+    "Handlebars"
+  ],
+  "author": "Teynur Yuseinov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pgmgent-atwork2/project-3---werkstuk-bernardus-portaal/issues"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "body-parser": "^1.20.2",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.3.1",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "express": "^4.18.2",
+    "express-handlebars": "^7.0.7",
+    "express-validator": "^7.0.1",
+    "handlebars": "^4.7.7",
+    "jsonwebtoken": "^9.0.0",
+    "prettier": "^2.8.8",
+    "sqlite3": "^5.1.6",
+    "typeorm": "^0.3.17"
+  },
+  "devDependencies": {
+    "eslint": "^8.43.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "postcss": "^8.4.24",
+    "postcss-cli": "^10.1.0"
+  }
+}

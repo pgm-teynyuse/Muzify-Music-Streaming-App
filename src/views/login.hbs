@@ -1,0 +1,16 @@
+<div class="main"></div>
+<form id="formLog" method="post" action="login">
+   <div class="sign-box">
+      <p>Login</p>
+   </div>
+   <span id="msg"></span>
+   {{>form-errors this}}
+   {{#each inputs}}
+   {{>form-input this}}
+   {{/each}}
+   <br>
+   <input type="submit" value="Login" class="inp-Box submit">
+   <a href="/register" class="account-reg">Heb je geen account?</a> of <br>
+   <a href="/reader" class="account-reg">Enkel luisteren</a>
+</form>
+

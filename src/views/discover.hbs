@@ -1,0 +1,25 @@
+<section>
+    <div class="favAlbums">
+        <h2>Popular Albums</h2>
+        <div class="albums_group">
+            <ul>
+            {{#each albumsAll}}
+                <li>
+                    <div class="album_info">
+                        <img src="{{name}}.jpg" alt="{{name}}">
+                        <p>{{name}}</p>
+                    </div>
+                    <form action="/addtofavorites/{{ id }}" method="post">
+                        <input id="{{ id }}" type="hidden" name="_method" value="POST"></input>
+                        <button type="submit" value="add">Toevoegen aan favorieten</button>
+                    </form>
+                    <form action="/removefromfavorites/{{ id }}" method="post">
+                        <input type="hidden" name="_method" value="POST">
+                        <button type="submit">Verwijderen uit favorieten</button>
+                    </form>
+                </li>
+            {{/each}}
+            </ul>
+        </div>
+    </div>
+</section>

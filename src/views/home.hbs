@@ -1,0 +1,21 @@
+<section>
+    <div class="favAlbums">
+        <h2>Favorite albums</h2>
+        <div class="albums_group">
+            {{#each albums}}
+            <ul>
+                <li>
+                    <div class="album_info">
+                        <img src="{{name}}.jpg" alt="{{name}}">
+                        <p>{{name}}</p>
+                    </div>
+                    <form action="/removefromfavorites/{{ id }}" method="post">
+                        <input type="hidden" name="_method" value="POST">
+                        <button type="submit">Verwijderen uit favorieten</button>
+                    </form>
+                </li>
+            </ul>
+            {{/each}}
+        </div>
+    </div>
+</section>

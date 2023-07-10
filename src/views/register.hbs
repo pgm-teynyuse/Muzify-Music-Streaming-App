@@ -1,0 +1,20 @@
+<div class="main"></div>
+<form id="formLog" method="post" action="register">
+    <div class="sign-box">
+        <p>Registreren</p>
+    </div>
+    <span id="msg"></span>
+    {{>form-errors this}}
+    {{#each inputs}}
+    {{>form-input this}}
+    {{/each}}
+    <label for="roles">Authorisation</label>
+    <select name="role" id="roles">
+        {{#each roles}}
+        <option value="{{ label }}">{{label}}</option>
+        {{/each}}
+    </select>
+    <br>
+    <input type="submit" value="Register" class="inp-Box submit">
+    <a href="/login" class="account-reg">Heb je al een account?</a>
+</form>

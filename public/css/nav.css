@@ -1,0 +1,145 @@
+/*Navigation Reader*/
+.navbar{
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0rem;
+    width: 100%;
+    backdrop-filter: blur(10px);
+    justify-content: space-between;
+    padding: 0.5rem;
+    background-color: rgba(255,255,255,0.13);
+    & ul{
+        display: flex;
+        & li a{
+        margin: 0.5rem;
+        color: var(--dark-purple);
+        font-weight: 600;
+        }
+        & li a:hover{
+            color: var(--purple);
+        }
+    }
+    & .log_reg{
+        display: flex;
+    }
+    & .logo a {
+        display: flex;
+        align-items: center;
+        color: var(--purple);
+    & .name-logo{
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin: 0.5rem;
+    }
+    }
+    & .right-side{
+        display: flex;
+        align-items: center;
+    }
+}
+
+/*no blur nav*/
+.navbar-main{
+    position: fixed;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 4rem;
+    justify-content: space-between;
+    padding: 0.5rem;
+    & ul{
+        display: flex;
+        & li a{
+        margin: 0.5rem;
+        color: var(--dark-purple);
+        font-weight: 600;
+        }
+        & li a:hover{
+            color: var(--purple);
+        }
+    }
+    & .log_reg{
+        display: flex;
+    }
+    & .logo a {
+        display: flex;
+        align-items: center;
+        color: var(--purple);
+    & .name-logo{
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin: 0.5rem;
+    }
+    }
+    & .right-side{
+        display: flex;
+        align-items: center;
+    }
+}
+
+/*Navigation - main*/
+.side-nav{
+    background-color: var(--light-green);
+    padding: 0.5rem;
+    width: 15%;
+    height: 100vh;
+    margin-top: 4rem;
+    z-index: 1;
+    & a{
+        color: var(--purple);
+        
+        & .item-nav:hover{
+        transform: scale(1.03);
+        transition: all 0.1s;
+    }
+    }
+    & .items-col2{
+        margin-top: 3rem;
+        border-top: 0.1rem solid var(--purple);
+    }
+    & .item-nav{
+        display: flex;
+        align-items: center;
+        margin-top: 2rem;
+        margin-bottom: 1.5rem;
+        transition: all 0.2s;
+        & svg{
+            width: 2rem;
+        }
+        & p{
+            margin-left: 0.5rem;
+        }
+    }
+
+}
+
+.auth-user{
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+    & .user-pic img {
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+}
+
+.bg-logo{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 15%;
+    height: 4rem;
+    background-color: var(--light-green);
+    z-index: -1;
+}
+
+/*Player*/
+
+
+
+
