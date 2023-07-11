@@ -1,0 +1,23 @@
+<section>
+    <div class="favAlbums">
+        <h2>Playlists</h2>
+        <div class="albums_group">
+            <ul>
+                {{#each playlistAll}}
+                <a href="/playlist/{{ id }}">
+                    <li>
+                        <div class="album_info">
+                            <img src="{{name}}.jpg" alt="{{name}}">
+                            <p>{{name}}</p>
+                        </div>
+                        <form action="/removePlaylist/{{ id }}" method="post">
+                            <input type="hidden" name="_method" value="POST">
+                            <button type="submit">Verwijderen playlist</button>
+                        </form>
+                    </li>
+                </a>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+</section>

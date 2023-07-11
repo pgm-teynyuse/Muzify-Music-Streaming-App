@@ -22,9 +22,22 @@ export default new EntitySchema({
       target: 'Album',
       type: 'many-to-one',
     },
-    playlists: {
-      target: 'Playlist',
+    clients: {
       type: 'many-to-many',
+      target: 'User',
+      joinTable: {
+        name: 'Song_Clients',
+        joinColumn: {
+          name: 'song_id',
+        },
+        inverseJoinColumn: {
+          name: 'client_id',
+        },
+      },
+    },
+    playlists: {
+      type: 'many-to-many',
+      target: 'Playlist',
       joinTable: {
         name: 'song_playlist',
         joinColumn: {

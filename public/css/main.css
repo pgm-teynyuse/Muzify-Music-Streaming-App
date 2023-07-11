@@ -52,6 +52,7 @@ ul{
 
 h3{
     color: var(--purple);
+    font-size: 0.5rem;
     text-transform: uppercase;
 }
 

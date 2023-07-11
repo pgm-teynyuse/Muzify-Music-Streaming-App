@@ -1,24 +1,43 @@
 import DataSource from '../lib/DataSource.js';
 
-export const client = async (req, res) => {
-    const userRepository = DataSource.getRepository('User');
-    const albumRepository = DataSource.getRepository('Album')
-    const users = await userRepository.find();
+export const discover = async (req, res) => {
+  const userRepository = DataSource.getRepository('User');
+  const albumRepository = DataSource.getRepository('Album');
+  const songRepository = DataSource.getRepository('Song');
 
-    const albumDataAll = await albumRepository.find({
-    });
-    const albumsAll = albumDataAll;
-    
-    res.render('discover', {
+  const users = await userRepository.find();
+
+  const albumDataAll = await albumRepository.find({});
+  const songDataAll = await songRepository.find({
+    relations: ['artist']
+  });
+
+  const albumsAll = albumDataAll;
+  const songsAll = songDataAll;
+
+  // Randomly shuffle the albums and songs arrays
+  shuffleArray(albumsAll);
+  shuffleArray(songsAll);
+
+  console.log(songsAll);
+
+  res.render('discover', {
     user: req.user,
     users,
     albumsAll,
+    songsAll,
     layout: 'main',
     title: 'Discover',
-    });
+  });
 };
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
 
-export const addToFavorites = async (req, res) => {
+export const addAlbumToFavorites = async (req, res) => {
 try {
     const albumId = req.params.id; // ID van het geselecteerde album, afhankelijk van hoe het wordt doorgegeven
     const userId = req.user.id; // ID van de ingelogde gebruiker
@@ -52,8 +71,79 @@ try {
   }
 };
 
+export const addSongToFavorites = async (req, res) => {
+  try {
+    const songId = req.params.id; // ID of the selected song, depending on how it is passed
+    const userId = req.user.id; // ID of the logged-in user
 
-export const removeFromFavorites = async (req, res) => {
+    const songRepository = DataSource.getRepository('Song');
+    const userRepository = DataSource.getRepository('User');
+
+    const song = await songRepository.findOne({
+      where: {
+        id: songId
+      },
+      relations: ['clients'] // Including the many-to-many relationship 'users'
+    });
+
+    const user = await userRepository.findOne({
+      where: {
+        id: userId
+      }
+    });
+
+    if (song && user) {
+      song.clients.push(user); // Add the logged-in user to the users of the song
+      await songRepository.save(song);
+      res.redirect('/discover');
+    } else {
+      res.status(400).json({ error: 'Song or user not found' });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+export const removeSongFromFavorites = async (req, res) => {
+  try {
+    const songId = req.params.id; // ID van het liedje om te verwijderen
+    const userId = req.user.id; // ID van de ingelogde gebruiker
+
+    const songRepository = DataSource.getRepository('Song');
+    const userRepository = DataSource.getRepository('User');
+
+    const song = await songRepository.findOne({
+      where: {
+        id: songId
+      },
+      relations: ['clients'] 
+    });
+
+    if (song) {
+      const user = await userRepository.findOne({
+        where: {
+          id: userId
+        }
+      });
+
+      if (user) {
+        song.clients = song.clients.filter(client => client.id !== userId);
+        await songRepository.save(song);
+        res.redirect('/discover');
+      } else {
+        res.status(404).json({ success: false, message: 'User not found' });
+      }
+    } else {
+      res.status(404).json({ success: false, message: 'Song not found' });
+    }
+  } catch (error) {
+    console.error('Error removing from favorites:', error);
+    res.status(500).json({ success: false, message: 'An error occurred' });
+  }
+};
+
+export const removeAlbumFromFavorites = async (req, res) => {
   try {
     const albumId = req.params.id; // ID van het album om te verwijderen
     const userId = req.user.id; // ID van de ingelogde gebruiker
@@ -90,5 +180,7 @@ export const removeFromFavorites = async (req, res) => {
     res.status(500).json({ success: false, message: 'An error occurred' });
   }
 };
+
+
 
 

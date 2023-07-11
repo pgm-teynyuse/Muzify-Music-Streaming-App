@@ -25,3 +25,31 @@
         </div>
     </div>
 </section>
+<section>
+    <div class="favAlbums">
+        <h2>Popular Songs</h2>
+        <div class="albums_group">
+            <ul>
+                {{#each songsAll}}
+                <a href="/song/{{ id }}">
+                    <li>
+                        <div class="album_info">
+                            <img src="{{name}}.jpg" alt="{{name}}">
+                            <p>{{name}}</p>
+                            <p>{{artist.firstName}} {{artist.lastName}}</p>
+                        </div>
+                        <form action="/addSongtofavorites/{{ id }}" method="post">
+                            <input id="{{ id }}" type="hidden" name="_method" value="POST"></input>
+                            <button type="submit" value="add">Toevoegen aan favorieten</button>
+                        </form>
+                        <form action="/removeSongfromfavorites/{{ id }}" method="post">
+                            <input type="hidden" name="_method" value="POST">
+                            <button type="submit">Verwijderen uit favorieten</button>
+                        </form>
+                    </li>
+                </a>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+</section>

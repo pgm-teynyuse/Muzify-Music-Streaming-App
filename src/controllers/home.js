@@ -15,6 +15,14 @@ export const home = async (req, res) => {
     });
     const albums = albumData;
 
+  const songRepository = DataSource.getRepository('Song')
+  const songData = await songRepository.find({
+    where: {
+        clients: { id: userId },
+    },
+    });
+    const songs = songData;
+
   if (req.user) {
     if (userRole === 'Admin') {
       res.render('admin', {
@@ -25,11 +33,13 @@ export const home = async (req, res) => {
       res.render('home', {
         user: req.user,
         albums,
+        songs,
         users,
       });
     } else if (userRole === 'Artist') {
       res.render('artist', {
         user: req.user,
+        songs,
         albums,
         users,
       });

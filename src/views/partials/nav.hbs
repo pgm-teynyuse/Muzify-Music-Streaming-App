@@ -7,6 +7,14 @@
         </a>
     </div>
     <div class="right-side">
+        <div class="auth-user">
+            <div class="user-pic">
+                <img src="/images/{{user.firstName}}.jpg" alt="">
+            </div>
+            <div class="user-info">
+                <h3>{{user.firstName}} {{user.lastName}}</h3>
+            </div>
+        </div>
         <div class="log_reg">
             <form class="button" action="/logout" method="post">
                 <div class="account">
