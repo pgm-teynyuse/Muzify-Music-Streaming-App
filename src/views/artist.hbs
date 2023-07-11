@@ -4,6 +4,7 @@
         <div class="albums_group">
             {{#each albums}}
             <ul>
+                <a href="/album/{{ id }}">
                 <li>
                     <div class="album_info">
                         <img src="{{name}}.jpg" alt="{{name}}">
@@ -14,6 +15,7 @@
                         <button type="submit">Verwijderen uit favorieten</button>
                     </form>
                 </li>
+                </a>
             </ul>
             {{/each}}
         </div>

@@ -12,7 +12,7 @@ import { reader } from './controllers/reader.js';
 import { client, addToFavorites, removeFromFavorites } from './controllers/discover.js';
 
 // Artist
-import { albums } from './controllers/albums.js';
+import { albums, detailAlbum, createAlbum, deleteAlbum, updateAlbum } from './controllers/albums.js';
 
 // import users
 import {
@@ -64,6 +64,10 @@ app.post('/removefromfavorites/:id', jwtAuth, removeFromFavorites);
 
 // Artist
 app.get('/albums', jwtAuth, albums);
+app.get('/album/:id', jwtAuth, detailAlbum);
+app.post('/createAlbum', jwtAuth, createAlbum);
+app.post('/deleteAlbum/:id', jwtAuth, deleteAlbum);
+app.post('/updateAlbum/:id', jwtAuth, updateAlbum);
 
 // Login and Register
 app.get('/login', login);

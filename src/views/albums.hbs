@@ -4,14 +4,41 @@
         <div class="albums_group">
             <ul>
                 {{#each albumsArtist}}
+                <a href="/album/{{ id }}">
                 <li>
                     <div class="album_info">
                         <img src="{{name}}.jpg" alt="{{name}}">
-                        <p>{{name}}</p>
                     </div>
+                <form class="form-update" action="/updateAlbum/{{id}}" method="POST">
+                    <input type="text" id="{{id}}" name="name" value="{{name}}"></input>
+                    <div class="button-container">
+                        <button class="btn btn-edit" type="submit" value="done">Bewerken</button>
+                    </div>
+                </form>
+
+                <form class="form-delete" action="/deleteAlbum/{{id}}" method="POST">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button class="btn-delete" type="submit" value="delete">Verwijderen</button>
+                </form>
                 </li>
+                </a>
                 {{/each}}
             </ul>
         </div>
     </div>
+</section>
+<section>
+<form action="/createAlbum" method="POST" class="form-album">
+    <div>
+        <label for="name">Name</label>
+        <input type="text" name="name" placeholder="Enter the album name" required>
+    </div>
+    <div>
+        <input type="hidden" name="artist" value="{{user.id}}">
+    </div>
+    <div>
+        <button class="btn" type="submit">Create Album</button>
+    </div>
+</form>
+
 </section>

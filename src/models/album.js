@@ -21,6 +21,11 @@ export default new EntitySchema({
         name: 'artist_id',
       },
     },
+    songs: {
+      type: 'one-to-many',
+      target: 'Song',
+      inverseSide: 'album',
+    },
   clients: {
       type: 'many-to-many',
       target: 'User',
