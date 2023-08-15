@@ -1,0 +1,17 @@
+<section>
+    <div class="songDetail">
+        <h2>{{songsDetail.name}}</h2>
+        <p>{{songsDetail.artist.firstName}} {{songsDetail.artist.lastName}}</p>
+        <a href="/album/{{songsDetail.album.id}}">{{songsDetail.album.name}}</a>
+    </div>
+<form action="/toPlaylist/{{songsDetail.id}}" method="post">
+    <input type="hidden" name="songId" value="{{songsDetail.id}}">
+    <label for="playlistId">Select Playlist:</label>
+    <select name="playlistId" id="playlistId">
+        {{#each playlists}}
+        <option value="{{id}}">{{name}}</option>
+        {{/each}}
+    </select>
+    <button type="submit">Add to Playlist</button>
+</form>
+</section>

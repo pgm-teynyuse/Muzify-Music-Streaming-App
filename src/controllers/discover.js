@@ -4,32 +4,47 @@ export const discover = async (req, res) => {
   const userRepository = DataSource.getRepository('User');
   const albumRepository = DataSource.getRepository('Album');
   const songRepository = DataSource.getRepository('Song');
+  const playlistRepository = DataSource.getRepository('Playlist');
+      const userId = req.user.id; // ID of the logged-in user
 
-  const users = await userRepository.find();
+  try {
+    const users = await userRepository.find();
+    const albumDataAll = await albumRepository.find({});
 
-  const albumDataAll = await albumRepository.find({});
-  const songDataAll = await songRepository.find({
-    relations: ['artist']
-  });
+    const playlistDataAll = await playlistRepository.find({
+      where:{
+        users:{ id: userId }
+      }
+    });
+    const songDataAll = await songRepository.find({
+      relations: ['artist']
+    });
 
-  const albumsAll = albumDataAll;
-  const songsAll = songDataAll;
+    const albumsAll = albumDataAll;
+    const songsAll = songDataAll;
+    const playlists = playlistDataAll;
 
-  // Randomly shuffle the albums and songs arrays
-  shuffleArray(albumsAll);
-  shuffleArray(songsAll);
+    // Randomly shuffle the albums and songs arrays
+    shuffleArray(albumsAll);
+    shuffleArray(songsAll);
 
-  console.log(songsAll);
 
-  res.render('discover', {
-    user: req.user,
-    users,
-    albumsAll,
-    songsAll,
-    layout: 'main',
-    title: 'Discover',
-  });
+console.log(playlists)
+    res.render('discover', {
+      user: req.user,
+      users,
+      albumsAll,
+      songsAll,
+      playlists,
+      layout: 'main',
+      title: 'Discover',
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 };
+
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -95,7 +110,7 @@ export const addSongToFavorites = async (req, res) => {
     if (song && user) {
       song.clients.push(user); // Add the logged-in user to the users of the song
       await songRepository.save(song);
-      res.redirect('/discover');
+      res.redirect('/likedSongs');
     } else {
       res.status(400).json({ error: 'Song or user not found' });
     }
@@ -180,6 +195,15 @@ export const removeAlbumFromFavorites = async (req, res) => {
     res.status(500).json({ success: false, message: 'An error occurred' });
   }
 };
+
+
+
+
+
+
+
+
+
 
 
 

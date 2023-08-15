@@ -9,19 +9,18 @@
                     <div class="album_info">
                         <img src="{{name}}.jpg" alt="{{name}}">
                     </div>
-                <form class="form-update" action="/updateAlbum/{{id}}" method="POST">
-                    <input type="text" id="{{id}}" name="name" value="{{name}}"></input>
-                    <div class="button-container">
-                        <button class="btn btn-edit" type="submit" value="done">Bewerken</button>
-                    </div>
-                </form>
-
                 <form class="form-delete" action="/deleteAlbum/{{id}}" method="POST">
                     <input type="hidden" name="_method" value="DELETE">
                     <button class="btn-delete" type="submit" value="delete">Verwijderen</button>
                 </form>
                 </li>
                 </a>
+                <form class="form-update" action="/updateAlbum/{{id}}" method="POST">
+                    <input type="text" id="{{id}}" name="name" value="{{name}}"></input>
+                    <div class="button-container">
+                        <button class="btn btn-edit" type="submit" value="done">Bewerken</button>
+                    </div>
+                </form>
                 {{/each}}
             </ul>
         </div>

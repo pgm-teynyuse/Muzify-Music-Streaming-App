@@ -1,0 +1,18 @@
+<div class="albums_group">
+    {{#each songs}}
+    <ul>
+        <a href="/song/{{ id }}">
+            <li>
+                <div class="album_info">
+                    <img src="{{name}}.jpg" alt="{{name}}">
+                    <p>{{name}}</p>
+                </div>
+                <form action="/removeSongfromfavorites/{{ id }}" method="post">
+                    <input type="hidden" name="_method" value="POST">
+                    <button type="submit">Verwijderen uit favorieten</button>
+                </form>
+            </li>
+        </a>
+    </ul>
+    {{/each}}
+</div>

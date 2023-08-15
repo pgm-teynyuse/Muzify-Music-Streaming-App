@@ -25,19 +25,6 @@ export default new EntitySchema({
         },
       },
     songs: {
-      target: 'Song',
-      type: 'many-to-many',
-      joinTable: {
-        name: 'song_playlist',
-        joinColumn: {
-          name: 'song_id',
-        },
-        inverseJoinColumn: {
-          name: 'playlist_id',
-        },
-      },
-    },
-    songs: {
       type: 'many-to-many',
       target: 'Song',
       joinTable: {

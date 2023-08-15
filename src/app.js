@@ -9,14 +9,16 @@ import DataSource from './lib/DataSource.js';
 
 import { home } from './controllers/home.js';
 import { reader } from './controllers/reader.js';
-import { discover, addAlbumToFavorites, removeAlbumFromFavorites, addSongToFavorites, removeSongFromFavorites } from './controllers/discover.js';
+import { discover, addAlbumToFavorites, removeAlbumFromFavorites, addSongToFavorites, removeSongFromFavorites} from './controllers/discover.js';
 
 // Artist
-import { albums, detailAlbum, createAlbum, deleteAlbum, updateAlbum } from './controllers/albums.js';
+import { albums, detailAlbum, createAlbum, deleteAlbum, updateAlbum, addSong, updateSong, deleteSong } from './controllers/albums.js';
 
 // Playlist
-import { playlists, detailPlaylist } from './controllers/playlist.js';
+import { playlists, detailPlaylist, createPlaylist, updatePlaylist, deletePlaylist, removeSongFromPlaylist } from './controllers/playlist.js';
 
+// Song
+import { detailSong, addSongToPlaylist, likedSongs  } from './controllers/song.js';
 
 // import users
 import {
@@ -71,6 +73,11 @@ app.post('/removeSongfromfavorites/:id', jwtAuth,removeSongFromFavorites);
 // Playlist
 app.get('/playlists', jwtAuth, playlists);
 app.get('/playlist/:id', jwtAuth, detailPlaylist);
+app.post('/createPlaylist', jwtAuth, createPlaylist);
+app.post('/removePlaylist/:id', jwtAuth, deletePlaylist); 
+app.post('/updatePlaylist/:id', jwtAuth, updatePlaylist); 
+
+app.post('/deleteSongFromPlaylist/:id', jwtAuth, removeSongFromPlaylist);
 
 // Artist
 app.get('/albums', jwtAuth, albums);
@@ -78,6 +85,17 @@ app.get('/album/:id', jwtAuth, detailAlbum);
 app.post('/createAlbum', jwtAuth, createAlbum);
 app.post('/deleteAlbum/:id', jwtAuth, deleteAlbum);
 app.post('/updateAlbum/:id', jwtAuth, updateAlbum);
+
+app.post('/addSong', jwtAuth, addSong);
+app.post('/updateSong/:id', jwtAuth, updateSong);
+app.post('/deleteSong/:id', jwtAuth, deleteSong);
+
+// Song
+app.get('/song/:id', jwtAuth, detailSong);
+app.get('/likedSongs', jwtAuth, likedSongs);
+app.post('/toPlaylist/:id', jwtAuth, addSongToPlaylist);
+
+
 
 // Login and Register
 app.get('/login', login);

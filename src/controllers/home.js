@@ -12,6 +12,7 @@ export const home = async (req, res) => {
     where: {
         clients: { id: userId },
     },
+    relations:['artist']
     });
     const albums = albumData;
 
@@ -28,6 +29,7 @@ export const home = async (req, res) => {
       res.render('admin', {
         user: req.user,
         users,
+        title: "Home"
       });
     } else if (userRole === 'Client') {
       res.render('home', {
@@ -35,6 +37,7 @@ export const home = async (req, res) => {
         albums,
         songs,
         users,
+        title: "Home"
       });
     } else if (userRole === 'Artist') {
       res.render('artist', {
@@ -42,6 +45,7 @@ export const home = async (req, res) => {
         songs,
         albums,
         users,
+        title: "Home"
       });
     }
   }
