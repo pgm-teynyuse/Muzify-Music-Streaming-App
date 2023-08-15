@@ -16,8 +16,26 @@
                         </form>
                     </li>
                 </a>
+                <form class="form-update" action="/updatePlaylist/{{id}}" method="POST">
+                    <input type="text" id="{{id}}" name="name" value="{{name}}"></input>
+                    <div class="button-container">
+                        <button class="btn btn-edit" type="submit" value="done">Bewerken</button>
+                    </div>
+                </form>
                 {{/each}}
             </ul>
+        <form action="/createPlaylist" method="POST" class="form-album">
+            <div>
+                <label for="name">Name</label>
+                <input type="text" name="name" placeholder="Enter the playlist name" required>
+            </div>
+            <div>
+                <input type="hidden" name="user" value="{{users.id}}">
+            </div>
+            <div>
+                <button class="btn" type="submit">Create Playlist</button>
+            </div>
+        </form>
         </div>
     </div>
 </section>

@@ -7,8 +7,9 @@
                 <a href="/album/{{ id }}">
                 <li>
                     <div class="album_info">
-                        <img src="{{name}}.jpg" alt="{{name}}">
+                        <img src="images/{{artist.firstName}}{{artist.lastName}}{{name}}.png" alt="{{name}}">
                         <p>{{name}}</p>
+                        <p>{{artist.firstName}} {{artist.lastName}}</p>
                     </div>
                     <form action="/removefromfavorites/{{ id }}" method="post">
                         <input type="hidden" name="_method" value="POST">
@@ -27,7 +28,7 @@
         <div class="albums_group">
             {{#each songs}}
             <ul>
-                <a href="/album/{{ id }}">
+                <a href="/song/{{ id }}">
                     <li>
                         <div class="album_info">
                             <img src="{{name}}.jpg" alt="{{name}}">

@@ -1,8 +1,15 @@
-<h1>{{playlistDetail.name}}</h1>
+<h1>{{playlistDetail.name}}
+</h1>
 <section>
     <ul>
         {{#each playlistDetail.songs}}
+        <a href="/song/{{ id }}">
         <li>{{name}}</li>
+    <form action="/deleteSongFromPlaylist/{{ id }}" method="post">
+        <input type="hidden" name="_method" value="{{id}}">
+        <button type="submit">Verwijderen uit playlist</button>
+    </form>
         {{/each}}
+        </a>
     </ul>
 </section>

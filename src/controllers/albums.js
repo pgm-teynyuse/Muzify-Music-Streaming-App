@@ -1,5 +1,6 @@
 import DataSource from '../lib/DataSource.js';
 import jwt from 'jsonwebtoken';
+import album from '../models/album.js';
 
 export const albums = async (req, res) => {
     const userRepository = DataSource.getRepository('User');
@@ -19,6 +20,7 @@ export const albums = async (req, res) => {
     user: req.user,
     albumsArtist,
     users,
+    title: "My Albums"
     });
 }
 
@@ -30,18 +32,25 @@ export const detailAlbum = async (req, res) => {
     const albumRepository = DataSource.getRepository('Album')
     const albumData = await albumRepository.findOne({
         where: {
-            id:albumId,
+            id: albumId,
         },
-        relations: ['artist','songs']
-        });
-
-    const albumsDetail = albumData;
-    console.log(albumsDetail)
-    res.render('album-detail', {
-    user: req.user,
-    albumsDetail,
-    users,
+        relations: ['artist', 'songs']
     });
+
+    if (albumData) {
+        const albumsDetail = albumData;
+        const albumTitle = albumsDetail.name; 
+        console.log(albumsDetail);
+        
+        res.render('album-detail', {
+            user: req.user,
+            albumsDetail,
+            users,
+            title: albumTitle 
+        });
+    } else {
+        res.status(404).send('Album not found');
+    }
 }
 
 export const createAlbum = async (req, res, next) => {
@@ -153,6 +162,182 @@ export const updateAlbum = async (req, res, next) => {
     next(error);
   }
 };
+
+export const addSong = async (req, res, next) => {
+  try {
+    const { token } = req.cookies;
+    const tokenDeco = jwt.decode(token);
+
+    if (!req.body.name) {
+      throw new Error('Please provide a name for the song.');
+    }
+    if (!req.body.artist) {
+      throw new Error('Please provide an artist for the song.');
+    }
+
+    const songRepository = DataSource.getRepository('Song');
+    const albumRepository = DataSource.getRepository('Album');
+    const userRepository = DataSource.getRepository('User'); 
+    const user = await userRepository.find();
+
+    const artistId = req.user.id;
+    const albumId = req.params.id;
+    console.log('Received albumId:', albumId);
+
+    // Fetch the album and check if the logged-in user (artist) is the owner
+    const album = await albumRepository.findOne({
+      where: {
+        id: albumId,
+        artist: artistId,
+      },
+      relations:['artist']
+    });
+
+    if (!album) {
+      res.status(403).send({ status: 'You do not have permission to add a song to this album.' });
+      return;
+    }
+
+    // Fetch the user's information
+    const artist = await userRepository.find({
+      where: {
+        id: artistId,
+      },
+    });
+
+    if (!artist) {
+      res.status(404).send({ status: 'Artist not found.' });
+      return;
+    }
+
+    const song = await songRepository.findOne({
+      where: {
+        name: req.body.name,
+        artist: artistId,
+        album: albumId,
+      },
+      relations: ['album'],
+    });
+
+    if (song) {
+      res.status(200).send({ status: `Song with name ${song.name} already exists.` });
+      return;
+    }
+
+    req.body.artist = artistId;
+
+    console.log('Song Request: ', req.body);
+
+    const createdSong = await songRepository.create(req.body);
+    const savedSong = await songRepository.save(createdSong);
+
+    console.log('Redirecting to albumId:', albumId);
+    res.status(200).redirect(`/albums`);
+  } catch (error) {
+    next(error.message);
+  }
+};
+
+export const deleteSong = async (req, res, next) => {
+  console.log('Deleting song');
+  try {
+    const songId = req.params.id;
+
+    const songRepository = DataSource.getRepository('Song');
+    const albumRepository = DataSource.getRepository('Album');
+    const userRepository = DataSource.getRepository('User'); // Add this line
+
+    const artistId = req.user.id;
+
+    const song = await songRepository.findOne({
+      where: {
+        id: songId,
+        artist: artistId,
+      },
+      relations: ['album'],
+    });
+
+    if (!song) {
+      res.status(404).send({ error: 'Song not found.' });
+      return;
+    }
+
+    const albumId = song.album.id;
+
+
+    const album = await albumRepository.findOne({
+      where: {
+        id: albumId,
+        artist: {id:artistId},
+      },
+    });
+
+    if (!album) {
+      res.status(403).send({ error: 'You do not have permission to delete this song.' });
+      return;
+    }
+
+    // Fetch the user's information
+    const artist = await userRepository.findOne({
+      where: {
+        id: artistId,
+      },
+    });
+
+    if (!artist) {
+      res.status(404).send({ error: 'Artist not found.' });
+      return;
+    }
+
+    await songRepository.delete(songId);
+    res.redirect(`/album/${albumId}`);
+    res.locals.alertMessage = 'Song successfully deleted!';
+  } catch (error) {
+    console.log('Oopsie daisy, er ging iets mis', error);
+    next(error);
+  }
+};
+
+
+export const updateSong = async (req, res, next) => {
+  console.log('Updating song');
+  try {
+    const songId = req.params.id;
+    const updatedName = req.body.name;
+
+    if (!updatedName) {
+      throw new Error('Please provide a name for the updated song.');
+    }
+
+    const songRepository = DataSource.getRepository('Song');
+
+    const artistId = req.user.id;
+
+    const song = await songRepository.findOne({
+      where: {
+        id: songId,
+        artist: artistId,
+      },
+      relations:['album']
+    });
+
+    if (!song) {
+      res.status(404).send({ error: 'Song not found.' });
+      return;
+    }
+
+    song.name = updatedName;
+    const albumId = song.album.id;
+
+    const updatedSong = await songRepository.save(song);
+    res.redirect(`/album/${albumId}`);
+  } catch (error) {
+    console.log('Oopsie daisy, er ging iets mis', error);
+    next(error);
+  }
+};
+
+
 
 
 

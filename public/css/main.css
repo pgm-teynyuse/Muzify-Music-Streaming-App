@@ -19,10 +19,10 @@
 
     --light-green: #a7cab1;
     --purple: hsl(263, 12%, 53%);
-    --dark-purple: hsl(300, 66%, 12%);
+    --dark-purple: #330a33;
     --black: hsl(0, 0%, 0%);
 
-    --light-red: hsl(0, 100%, 77%);
+    --light-red: #ff8a8a;
     --red: hsl(0, 100%, 33%);
 
     /*Dark Mode*/
@@ -35,7 +35,7 @@
 
 body{
     font-family: 'Inter';
-    background-color: var(--light);
+    background-color: var(--middle-black);
 }
 
 section{
@@ -48,6 +48,11 @@ ul{
     list-style: none;
     padding: 0rem;
     margin: 0rem;
+}
+
+a{
+    text-decoration: none;
+    color: var(--purple);
 }
 
 h3{
@@ -143,4 +148,80 @@ button:hover{
         align-items: center;
     }
 }
+
+/*Album Cover*/
+
+.album {
+    margin: auto;
+    overflow: hidden;
+    transition: all 0.5s ease;
+
+    & .album_info {
+        & .under_info {
+            text-align: left;
+        }
+    }
+}
+    .album_image {
+            width: 15rem;
+            height: 15rem;
+            overflow: hidden;
+            & .album_image {
+                width: 100%;
+                height: auto; 
+                display: block;
+            }
+    }
+
+.hoverable-link {
+    position: relative;
+    display: inline-block;
+    transition: all 0.5s ease;
+
+    & .album_info {
+    transition: all 0.5s ease;
+    }
+
+    &:hover {
+        & .album_info {
+            transform: translateY(-5px);
+            transition: all 0.5s ease;
+        }
+
+        & .under_info {
+            opacity: 1;
+            transform: translateY(5px);
+            transition: all 0.1s ease-in-out;
+        }
+    }
+}
+
+.under_info {
+    opacity: 0;
+    transform: translateY(-5px);
+    display: flex;
+    justify-content: space-between;
+    width: 15rem;
+    position: absolute;
+    top: 80%;
+    left: 0;
+    background-color: var(--white);
+    padding: 10px;
+    transition: all 0.3s ease;
+}
+
+.like_button{
+        width: 2rem;
+}
+
+/*Home - Albums*/
+
+.fav_group{
+    display: flex;
+}
+
+
+
+
+
 

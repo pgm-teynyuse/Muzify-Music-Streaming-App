@@ -1,9 +1,44 @@
 <h1>{{albumsDetail.name}}</h1>
 <section>
+    <div><a href="/albums">Alle albums</a></div>
     <ul>
+    {{#ifEquals user.id albumsDetail.artist.id}}
         {{#each albumsDetail.songs}}
+        <a href="/song/{{ id }}">
         <li>{{name}}</li>
+        </a>
+        <form class="form-update" action="/updateSong/{{id}}" method="POST">
+            <input type="text" id="{{id}}" name="name" value="{{name}}"></input>
+            <input type="hidden" name="album" value="{{albumsDetail.id}}">
+            <div class="button-container">
+                <button class="btn btn-edit" type="submit" value="done">Bewerken</button>
+            </div>
+        </form>
+        <form class="form-delete" action="/deleteSong/{{id}}" method="POST">
+            <input type="hidden" name="_method" value="DELETE">
+            <button class="btn-delete" type="submit" value="delete">Verwijderen</button>
+        </form>
         {{/each}}
     </ul>
+        <form action="/addSong" method="POST" class="form-album">
+            <div>
+                <label for="name">Name</label>
+                <input type="text" name="name" placeholder="Enter the song name" required>
+            </div>
+            <div>
+                <input type="hidden" name="artist" value="{{user.id}}">
+                <input type="hidden" name="album" value="{{albumsDetail.id}}">
+            </div>
+            <div>
+                <button class="btn" type="submit">Create Song</button>
+            </div>
+        </form>
+    {{else}}
+        {{#each albumsDetail.songs}}
+        <a href="/song/{{ id }}">
+            <li>{{name}}</li>
+        </a>
+        {{/each}}
+    {{/ifEquals}}
 </section>
 

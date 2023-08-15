@@ -80,7 +80,7 @@
 
 /*Navigation - main*/
 .side-nav{
-    background-color: var(--light-green);
+    background-color: var(--light-black);
     padding: 0.5rem;
     width: 15%;
     height: 100vh;
@@ -132,7 +132,7 @@
     left: 0;
     width: 15%;
     height: 4rem;
-    background-color: var(--light-green);
+    background-color: var(--light-black);
     z-index: -1;
 }
 
