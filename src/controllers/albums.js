@@ -1,6 +1,5 @@
 import DataSource from '../lib/DataSource.js';
 import jwt from 'jsonwebtoken';
-import album from '../models/album.js';
 
 export const albums = async (req, res) => {
     const userRepository = DataSource.getRepository('User');
@@ -12,6 +11,7 @@ export const albums = async (req, res) => {
         where: {
             artist: { id: userId },
         },
+        relations:['artist']
         });
 
     const albumsArtist = albumData;
@@ -34,13 +34,13 @@ export const detailAlbum = async (req, res) => {
         where: {
             id: albumId,
         },
-        relations: ['artist', 'songs']
+        relations: ['artist', 'songs', 'songs.artist', 'songs.album']
     });
 
     if (albumData) {
         const albumsDetail = albumData;
         const albumTitle = albumsDetail.name; 
-        console.log(albumsDetail);
+        console.log(albumsDetail.artist);
         
         res.render('album-detail', {
             user: req.user,
@@ -60,6 +60,8 @@ try {
 
     if (!req.body.name)
     throw new Error('Please provide a name for the album.');
+    if (!req.body.genre)
+    throw new Error('Please provide a genre for the album.');
     if (!req.body.artist)
     throw new Error('Please provide an artist for the album.');
 
@@ -71,6 +73,7 @@ try {
     where: {
         name: req.body.name,
         artist: artistId,
+        genre: req.body.genre
     },
     });
 
@@ -132,9 +135,13 @@ export const updateAlbum = async (req, res, next) => {
   try {
     const albumId = req.params.id;
     const updatedName = req.body.name;
+    const updatedGenre = req.body.genre;
 
     if (!updatedName) {
       throw new Error('Please provide a name for the updated album.');
+    }
+    if (!updatedGenre) {
+      throw new Error('Please provide a genre for the updated album.');
     }
 
     const albumRepository = DataSource.getRepository('Album');
@@ -154,6 +161,7 @@ export const updateAlbum = async (req, res, next) => {
     }
 
     album.name = updatedName;
+    album.genre = updatedGenre;
 
     const updatedAlbum = await albumRepository.save(album);
     res.redirect('/albums');
@@ -162,6 +170,7 @@ export const updateAlbum = async (req, res, next) => {
     next(error);
   }
 };
+
 
 export const addSong = async (req, res, next) => {
   try {

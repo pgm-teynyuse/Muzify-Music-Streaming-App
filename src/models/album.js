@@ -12,6 +12,10 @@ export default new EntitySchema({
     name: {
       type: 'varchar',
     },
+    genre: {
+      type: 'varchar',
+      nullable: true,
+    },
   },
   relations: {
     artist: {

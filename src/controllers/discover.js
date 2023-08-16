@@ -5,19 +5,27 @@ export const discover = async (req, res) => {
   const albumRepository = DataSource.getRepository('Album');
   const songRepository = DataSource.getRepository('Song');
   const playlistRepository = DataSource.getRepository('Playlist');
-      const userId = req.user.id; // ID of the logged-in user
+  const userId = req.user.id;
+  const roleId = 3
 
   try {
     const users = await userRepository.find();
-    const albumDataAll = await albumRepository.find({});
+    const albumDataAll = await albumRepository.find({
+      relations:['artist'],
+      take: 3,
+    });
 
     const playlistDataAll = await playlistRepository.find({
       where:{
-        users:{ id: userId }
-      }
+        users:{ role: {id:roleId} },
+      },
+      take: 5,
+      relations:['users']
     });
+    
     const songDataAll = await songRepository.find({
-      relations: ['artist']
+      relations: ['artist', 'album'],
+      take: 10,
     });
 
     const albumsAll = albumDataAll;
@@ -28,8 +36,8 @@ export const discover = async (req, res) => {
     shuffleArray(albumsAll);
     shuffleArray(songsAll);
 
-
 console.log(playlists)
+
     res.render('discover', {
       user: req.user,
       users,

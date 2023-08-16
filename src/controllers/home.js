@@ -21,6 +21,7 @@ export const home = async (req, res) => {
     where: {
         clients: { id: userId },
     },
+    relations:['artist', 'album']
     });
     const songs = songData;
 
@@ -40,7 +41,7 @@ export const home = async (req, res) => {
         title: "Home"
       });
     } else if (userRole === 'Artist') {
-      res.render('artist', {
+      res.render('home', {
         user: req.user,
         songs,
         albums,

@@ -1,59 +1,152 @@
-<section>
-    <div class="favAlbums">
-        <h2>Popular Albums</h2>
-        <div class="albums_group">
-            <ul>
-            {{#each albumsAll}}
-            <a href="/album/{{ id }}">
-                <li>
-                    <div class="album_info">
-                        <img src="{{name}}.jpg" alt="{{name}}">
-                        <p>{{name}}</p>
+<section class="discover_albums">
+  <div class="favAlbums">
+    <h2>Popular albums</h2>
+    <div class="fav_group">
+      {{#each albumsAll}}
+      <ul class="album_cover">
+        <li class="album"></li>
+        <a class="hoverable-link" href="/album/{{ id }}">
+          <div class="album_info">
+            <div class="album_image">
+              <img class="album_image" src="images/album/{{artist.firstName}}{{artist.lastName}}{{name}}.png"
+                alt="{{name}}">
+            </div>
+          </div>
+          <div class="under_info">
+            <div>
+              <h3>{{name}}</h3>
+              <h4>{{artist.firstName}} {{artist.lastName}}</h4>
+              <p>{{genre}}</p>
+            </div>
+            <div>
+                <form action="/addtofavorites/{{ id }}" method="post">
+                  <input id="{{ id }}" type="hidden" name="_method" value="POST"></input>
+                  <button title="like" type="submit" value="add">
+                        <div>
+                          <div class="like_dislike_buttons">
+                            <div class="like_button">
+                              <svg viewBox="0 0 24 24" fill="#330a33" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                  d="M12 5.50063C7.50016 0.825464 2 4.27416 2 9.1371C2 14 6.01943 16.5914 8.96173 18.9109C10 19.7294 11 20.5 12 20.5"
+                                  stroke="#330a33"  stroke-linecap="round"></path>
+                                <path 
+                                  d="M12 5.50063C16.4998 0.825464 22 4.27416 22 9.1371C22 14 17.9806 16.5914 15.0383 18.9109C14 19.7294 13 20.5 12 20.5"
+                                  stroke="#330a33"  stroke-linecap="round"></path>
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                  </button>
+                </form>
+              <form action="/removefromfavorites/{{ id }}" method="post">
+                <input type="hidden" name="_method" value="POST">
+                <button title="Dislike" class="diss_button" type="submit">
+                  <div>
+                    <div class="like_dislike_buttons">
+                      <div class="like_button">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M12 5.50063C7.50016 0.825464 2 4.27416 2 9.1371C2 14 6.01943 16.5914 8.96173 18.9109C10 19.7294 11 20.5 12 20.5"
+                            stroke="#847996" stroke-width="1.5" stroke-linecap="round"></path>
+                          <path opacity="0.2"
+                            d="M12 5.50063C16.4998 0.825464 22 4.27416 22 9.1371C22 14 17.9806 16.5914 15.0383 18.9109C14 19.7294 13 20.5 12 20.5"
+                            stroke="#330a33" stroke-width="1.5" stroke-linecap="round"></path>
+                        </svg>
+                      </div>
                     </div>
-                    <form action="/addtofavorites/{{ id }}" method="post">
-                        <input id="{{ id }}" type="hidden" name="_method" value="POST"></input>
-                        <button type="submit" value="add">Toevoegen aan favorieten</button>
-                    </form>
-                    <form action="/removefromfavorites/{{ id }}" method="post">
-                        <input type="hidden" name="_method" value="POST">
-                        <button type="submit">Verwijderen uit favorieten</button>
-                    </form>
-                </li>
-            </a>
-            {{/each}}
-            </ul>
-        </div>
+                  </div>
+                </button>
+              </form>
+            </div>
+          </div>
+        </a>
+        </li>
+      </ul>
+      {{/each}}
     </div>
+  </div>
+  <div class="popPlays">
+    <h2>Popular playlists by users</h2>
+    <ul>
+    {{#each playlists}}
+      <a href="playlist/{{id}}">
+        <li>
+          <img src="images/playlist.png" alt="">
+          <div class="playlist-info">
+              <h3>{{name}}</h3>
+              <p>{{users.firstName}} {{users.lastName}}</p>
+          </div>
+        </li>
+      </a>
+    {{/each}}
+    </ul>
+  </div>
 </section>
-<section>
+
 <section>
     <div class="favAlbums">
-        <h2>Popular Songs</h2>
-<div class="albums_group">
-  <ul>
-    {{#each songsAll}}
-    <a href="/song/{{ id }}">
-      <li>
-        <div class="album_info">
-          <img src="{{name}}.jpg" alt="{{name}}">
-          <p>{{name}}</p>
-          <p>{{artist.firstName}} {{artist.lastName}}</p>
-        </div>
-        <form action="/addSongtofavorites/{{ id }}" method="post">
-          <input id="{{ id }}" type="hidden" name="_method" value="POST"></input>
-          <button type="submit" value="add">Toevoegen aan favorieten</button>
-        </form>
-        <form action="/removeSongfromfavorites/{{ id }}" method="post">
-          <input type="hidden" name="_method" value="POST">
-          <button type="submit">Verwijderen uit favorieten</button>
-        </form>
-      </li>
-    </a>
-    {{/each}}
-  </ul>
-</div>
-
+      <h2>Top 10 songs</h2>
+      <div class="fav_group_song">
+        <ul>
+          {{#each songsAll}}
+          <a class="song-link" href="/song/{{ id }}">
+            <li class="song">
+            <div class="album_info_song">
+              <div class="album_image_song">
+                <img class="album_image_song" src="images/album/{{artist.firstName}}{{artist.lastName}}{{album.name}}.png"
+                  alt="{{name}}">
+              </div>
+            </div>
+            <div class="under_info_song">
+              <div class="song_info">
+                <h3>{{name}}</h3>
+                <p>{{artist.firstName}} {{artist.lastName}}</p>
+              </div>
+              <div class="like_buttons">
+                <form action="/removefromfavorites/{{ id }}" method="post">
+                  <input type="hidden" name="_method" value="POST">
+                  <button title="Dislike" type="submit">
+                    <div>
+                      <div class="like_dislike_buttons">
+                        <div class="like_button">
+                          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                              d="M12 5.50063C7.50016 0.825464 2 4.27416 2 9.1371C2 14 6.01943 16.5914 8.96173 18.9109C10 19.7294 11 20.5 12 20.5"
+                              stroke="#847996" stroke-width="1.5" stroke-linecap="round"></path>
+                            <path opacity="0.2"
+                              d="M12 5.50063C16.4998 0.825464 22 4.27416 22 9.1371C22 14 17.9806 16.5914 15.0383 18.9109C14 19.7294 13 20.5 12 20.5"
+                              stroke="#330a33" stroke-width="1.5" stroke-linecap="round"></path>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </button>
+                </form>
+                <form action="/addtofavorites/{{ id }}" method="post">
+                  <input id="{{ id }}" type="hidden" name="_method" value="POST"></input>
+                  <button title="like" type="submit" value="add">
+                    <div>
+                      <div class="like_dislike_buttons">
+                        <div class="like_button">
+                          <svg viewBox="0 0 24 24" fill="#330a33" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                              d="M12 5.50063C7.50016 0.825464 2 4.27416 2 9.1371C2 14 6.01943 16.5914 8.96173 18.9109C10 19.7294 11 20.5 12 20.5"
+                              stroke="#330a33" stroke-linecap="round"></path>
+                            <path
+                              d="M12 5.50063C16.4998 0.825464 22 4.27416 22 9.1371C22 14 17.9806 16.5914 15.0383 18.9109C14 19.7294 13 20.5 12 20.5"
+                              stroke="#330a33" stroke-linecap="round"></path>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </button>
+                </form>
+              </div>
+            </div>
+            </li>
+          </a>
+          {{/each}}
+        </ul>
+      </div>
     </div>
-</section>
-
 </section>

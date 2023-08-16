@@ -16,6 +16,7 @@
     /*Light Mode*/
     --light: hsl(82, 58%, 90%);
     --white: hsl(0, 0%, 100%);
+    --background: linear-gradient(120deg, #1db954, #191414);
 
     --light-green: #a7cab1;
     --purple: hsl(263, 12%, 53%);
@@ -27,7 +28,7 @@
 
     /*Dark Mode*/
 
-    --beige: hsl(43, 10%, 73%);
+    --beige: #c1bdb3;
     --gray: hsl(0, 2%, 49%);
     --middle-black: hsl(330, 2%, 24%);
     --light-black: hsl(330, 2%, 19%);
@@ -35,13 +36,15 @@
 
 body{
     font-family: 'Inter';
-    background-color: var(--middle-black);
+    background:linear-gradient(var(--light-black), var(--black));    
+    height: 100%;
 }
 
 section{
     display: flex;
     flex-direction: column;
-    margin-top: 9rem;
+    margin-top: 3rem;
+    padding: 1rem;
 }
 
 ul{
@@ -57,7 +60,7 @@ a{
 
 h3{
     color: var(--purple);
-    font-size: 0.5rem;
+    font-size: 0.2rem;
     text-transform: uppercase;
 }
 
@@ -70,21 +73,23 @@ h1{
     text-transform: uppercase;
     color: var(--purple);
     margin: 0.5rem;
+    font-size: 3rem;
+}
+
+h2{
+    text-transform: uppercase;
+    color: var(--purple);
 }
 
 a{
     text-decoration: none;
 }
 
-::-webkit-scrollbar {
-    display: none;
-}
 
 button {
     width:auto;
     height: 2rem;
     background-color: transparent;
-    margin: 0.5rem;
     color: var(--purple);
     font-size: 14px;
     font-weight: 600;
@@ -94,10 +99,10 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 0.1rem solid var(--purple);
     border-radius: 0.1rem;
     padding: 0.5rem;
     transition: all 0.2s ease;
+    margin: 0.3rem;
 }
 
 button:hover{
@@ -105,6 +110,34 @@ button:hover{
     color: var(--white);
     transform: scale(1.1);
 }
+
+.btn-delete:hover{
+    background-color: var(--red);
+}
+
+.btn-add{
+    position: absolute;
+    color: white;
+    top: 12.5rem;
+    background-color: var(--purple);
+    right: 5rem;
+    width: 15rem;
+
+    & svg{
+        margin-right: 1rem;
+    }
+}
+
+.btn-album{
+    width: 15rem;
+}
+
+
+
+
+
+
+
 
 
 /*Navigation Reader*/
@@ -149,13 +182,12 @@ button:hover{
     }
 }
 
-/*Album Cover*/
+/*Album - Song Cover*/
 
 .album {
     margin: auto;
     overflow: hidden;
     transition: all 0.5s ease;
-
     & .album_info {
         & .under_info {
             text-align: left;
@@ -203,22 +235,257 @@ button:hover{
     justify-content: space-between;
     width: 15rem;
     position: absolute;
-    top: 80%;
+    top: 66%;
     left: 0;
-    background-color: var(--white);
+    backdrop-filter: blur(2px);
+    background-color: hsla(0, 0%, 0%, 0.624);
+    box-shadow: 10px 10px 50px rgba(0, 0, 0, 0.485);
     padding: 10px;
     transition: all 0.3s ease;
 }
+
 
 .like_button{
         width: 2rem;
 }
 
-/*Home - Albums*/
+.song-link{
+    display: flex;
+    align-items: center;
+    padding: 0.4rem;
+    transition: all 0.3s ease;
+    & .song{
+        display: flex;
+    }
+    &:hover{
+        transform: scale(1.02);
+        transition: all 0.3s ease;
+        & .under_info_song{
+            background-color: rgba(0, 0, 0, 0.305);
+        }
+    }
+}
+
+.under_info_song{
+    display: flex;
+    align-items: center;
+    background-color: var(--light-black);
+    z-index: 1;
+    & .song_info{
+        display: flex;
+        width: 15rem;
+        flex-direction: column;
+        justify-content: space-around;
+        padding: 0.5rem;
+        box-shadow: 10px 10px 50px rgba(0, 0, 0, 0.485);
+    }
+}
+
+.album_image_song {
+        width: 4rem;
+        height: 4rem;
+        overflow: hidden;
+}
+
+
+/*Albums Home and Discover*/
 
 .fav_group{
+    padding: 0.4rem;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.discover_albums{
+    width: 55rem;
+}
+
+.album_cover{
+    margin: 0.8rem;
+}
+
+.popPlays{
+    & li{
+        display: flex;
+        padding: 1rem;
+        align-items: center;
+    }
+
+    & .playlist-info{
+        margin: 0.8rem;
+    }
+    & img{
+        width: 5rem;
+    }
+}
+
+/*Album detail header*/
+
+.header-image{
+    width: 12rem;
+}
+
+.inner-cover{
+    width: 116.4rem;
+    height: 50%;
+    overflow: hidden;
+
+    & img{
+    filter: blur(9px);
+    width: 100%;
+    }
+}
+
+.header-album{
+    position: absolute;
+    height: 40%;
+    z-index: -1;
+}
+
+.album_songs {
+    margin-top: 18rem;
+    padding-left: 3rem;
+    height: 35rem;
+    width: 116.4rem;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    margin-bottom: 1rem;
+      background: -webkit-linear-gradient(90deg, rgba(0, 0, 0, 0.15), transparent);
+}
+
+.album_songs::-webkit-scrollbar {
+    width: 5px; 
+}
+
+.album_songs::-webkit-scrollbar-thumb {
+    background-color: var(--beige);
+    border-radius: 5px; 
+}
+
+.album_songs::-webkit-scrollbar-track {
+    background-color: var(--black);
+}
+
+.song-album_detail{
+    display: flex;
+    align-items: first baseline;
+    margin-bottom: 1rem;
+    & a{
+        width: 10rem;
+    }
+
+    & .delete{
+        width: 1.5rem;
+    }
+}
+
+.header-image{
+    position: absolute;
+    display: flex;
+    top: 3rem;
+    left: 3rem;
+    background-color: hsla(0, 0%, 0%, 0.624);
+    box-shadow: 10px 10px 50px rgba(0, 0, 0, 0.485);
+}
+
+.song-delete-update{
     display: flex;
 }
+
+.form-update{
+    display: flex;
+}
+
+.album-detail{
+    display: flex;
+    flex-direction: column;
+}
+
+.formDisplay{
+    display: flex;
+    align-items: center;
+}
+
+.add{
+    width: 1.9rem;
+}
+
+.addSong{
+    margin-left: 3rem;
+    z-index: 1;
+}
+
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(2px);
+}
+
+.overlay-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.info-album{
+    width: 10rem;
+    & .info-album-text{
+        width: 40rem;
+    }
+
+    & p{
+        margin-top: 0.5rem;
+        margin-left: 0.5rem;
+        color: var(--purple);
+    }
+
+    & h2{
+        margin-top: -1rem;
+        margin-left: 0.5rem;
+    }
+}
+
+.like_buttons{
+    display: flex;
+}
+
+/*Album*/
+.cover_album{
+    width: 10rem;
+}
+
+.formOfAlbum{
+    display: flex;
+}
+
+.formAlbum{
+    display: flex;
+    flex-direction: column;
+}
+
+label{
+    color: white;
+}
+
+.edit_update{
+    display: flex;
+}
+
+.groupOfItem{
+    margin: 1rem;
+}
+
+
+
 
 
 

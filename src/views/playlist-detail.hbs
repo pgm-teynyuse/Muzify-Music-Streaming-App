@@ -2,6 +2,7 @@
 </h1>
 <section>
     <ul>
+    {{#ifEquals user.id playlistDetail.users.id}}
         {{#each playlistDetail.songs}}
         <a href="/song/{{ id }}">
         <li>{{name}}</li>
@@ -9,7 +10,16 @@
         <input type="hidden" name="_method" value="{{id}}">
         <button type="submit">Verwijderen uit playlist</button>
     </form>
-        {{/each}}
         </a>
+        {{/each}}
     </ul>
+        {{else}}
+        <div>
+            {{#each playlistDetail.songs}}
+            <a href="/song/{{ id }}">
+                <li>{{name}}</li>
+            </a>
+            {{/each}}
+        </div>
+        {{/ifEquals}}
 </section>

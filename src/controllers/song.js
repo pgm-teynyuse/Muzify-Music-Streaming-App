@@ -32,7 +32,6 @@ export const detailSong = async (req, res) => {
     });
 }
 
-
 export const addSongToPlaylist = async (req, res) => {
   try {
     const songId = req.body.songId;
@@ -91,6 +90,7 @@ export const likedSongs = async (req, res) => {
     where: {
         clients: { id: userId },
     },
+    relations:['artist', 'album']
     });
     const songs = songData;
 
