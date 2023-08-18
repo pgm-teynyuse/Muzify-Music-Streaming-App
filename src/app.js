@@ -11,19 +11,20 @@ import { home } from './controllers/home.js';
 import { reader } from './controllers/reader.js';
 import { discover, addAlbumToFavorites, removeAlbumFromFavorites, addSongToFavorites, removeSongFromFavorites} from './controllers/discover.js';
 
-// Artist
-import { albums, detailAlbum, createAlbum, deleteAlbum, updateAlbum, addSong, updateSong, deleteSong } from './controllers/albums.js';
+// Albums
+import { albums, albumsAll, detailAlbum, createAlbum, deleteAlbum, updateAlbum, addSong, updateSong, deleteSong } from './controllers/albums.js';
 
 // Playlist
 import { playlists, detailPlaylist, createPlaylist, updatePlaylist, deletePlaylist, removeSongFromPlaylist } from './controllers/playlist.js';
 
 // Song
-import { detailSong, addSongToPlaylist, likedSongs  } from './controllers/song.js';
+import { songsAll, detailSong, addSongToPlaylist, likedSongs  } from './controllers/song.js';
 
 // import users
 import {
   getUsers,
-  getUser
+  getUser,
+  userDetail,
 } from './controllers/api/users.js';
 
 // Import authentication
@@ -70,6 +71,9 @@ app.post('/removefromfavorites/:id', jwtAuth, removeAlbumFromFavorites, removeSo
 app.post('/addSongtofavorites/:id', jwtAuth, addSongToFavorites); 
 app.post('/removeSongfromfavorites/:id', jwtAuth,removeSongFromFavorites); 
 
+app.get('/albumsAll', jwtAuth, albumsAll);
+app.get('/songsAll', jwtAuth, songsAll);
+
 // Playlist
 app.get('/playlists', jwtAuth, playlists);
 app.get('/playlist/:id', jwtAuth, detailPlaylist);
@@ -94,6 +98,9 @@ app.post('/deleteSong/:id', jwtAuth, deleteSong);
 app.get('/song/:id', jwtAuth, detailSong);
 app.get('/likedSongs', jwtAuth, likedSongs);
 app.post('/toPlaylist/:id', jwtAuth, addSongToPlaylist);
+
+// User 
+app.get('/artist/:id', jwtAuth, userDetail);
 
 
 

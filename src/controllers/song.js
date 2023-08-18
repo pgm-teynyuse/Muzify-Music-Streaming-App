@@ -32,6 +32,25 @@ export const detailSong = async (req, res) => {
     });
 }
 
+export const songsAll = async (req, res) => {
+    const userRepository = DataSource.getRepository('User');
+    const users = await userRepository.find();
+    const userId = req.user.id; 
+    
+    const songRepository = DataSource.getRepository('Song')
+    const songDataAll = await songRepository.find({
+      relations: ['artist', 'album'],
+    });
+
+    const songsAll = songDataAll;
+    res.render('allSongs', {
+    user: req.user,
+    songsAll,
+    users,
+    title: "My Albums"
+    });
+}
+
 export const addSongToPlaylist = async (req, res) => {
   try {
     const songId = req.body.songId;

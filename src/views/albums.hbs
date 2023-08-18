@@ -1,6 +1,7 @@
 <section>
     <div class="favAlbums">
         <h2>My Albums</h2>
+        <button class="btn-add-playlist" id="showOverlayBtn">Make a new album</button>
         <div class="albums_group_edit">
             <ul class="edit_update">
                 {{#each albumsArtist}}
@@ -50,13 +51,15 @@
             </ul>
         </div>
     </div>
-<form action="/createAlbum" method="POST" class="form-album">
+    <div id="overlay" class="overlay">
+                <div class="overlay-content">
+<form action="/createAlbum" method="POST" class="albumArtist-form">
     <div>
-        <label for="name">Name</label>
+        <label class="labelAlbum" for="name">Name</label>
         <input type="text" name="name" placeholder="Enter the album name" required>
     </div>
         <div>
-        <label for="genre">Genre</label>
+        <label class="labelAlbum" for="genre">Genre</label>
         <input type="text" name="genre" placeholder="Enter the genre name" required>
     </div>
     <div>
@@ -66,4 +69,6 @@
         <button class="btn" type="submit">Create Album</button>
     </div>
 </form>
+</div>
+</div>
 </section>

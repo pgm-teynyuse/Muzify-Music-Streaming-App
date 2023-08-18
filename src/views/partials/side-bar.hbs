@@ -28,20 +28,62 @@
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 010 3.75H5.625a1.875 1.875 0 010-3.75z" />
                 </svg>
-                <p class="item-name">Playlist</p>
+                <p class="item-name">Playlists</p>
+            </li>
+        </a>
+        <a href="/AlbumsAll">
+            <li class="item-nav">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                    <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                    <circle cx="15.5" cy="8.5" r="1.5"></circle>
+                    <path d="M3 14.5h18"></path>
+                </svg>
+                <p class="item-name">Albums</p>
+            </li>
+        </a>
+        <a href="/songsAll">
+            <li class="item-nav">
+            <svg width="25px" viewBox="0 0 24 24" fill="none"  xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M6.28016 21.9998C8.00328 21.9998 9.40016 20.6029 9.40016 18.8798C9.40016 17.1566 8.00328 15.7598 6.28016 15.7598C4.55703 15.7598 3.16016 17.1566 3.16016 18.8798C3.16016 20.6029 4.55703 21.9998 6.28016 21.9998Z"
+                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path
+                        d="M17.7196 19.9202C19.4427 19.9202 20.8396 18.5233 20.8396 16.8002C20.8396 15.077 19.4427 13.6802 17.7196 13.6802C15.9965 13.6802 14.5996 15.077 14.5996 16.8002C14.5996 18.5233 15.9965 19.9202 17.7196 19.9202Z"
+                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <g opacity="0.4">
+                        <path
+                            d="M20.8404 16.8003V4.60034C20.8404 2.00034 19.2104 1.64034 17.5604 2.09034L11.3204 3.79034C10.1804 4.10034 9.40039 5.00034 9.40039 6.30034V8.47034V9.93034V18.8703"
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M9.40039 9.52039L20.8404 6.40039" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round"></path>
+                    </g>
+                </g>
+            </svg>
+                <p class="item-name">Songs</p>
             </li>
         </a>
     </ul>
     <ul class="items-col2">
-        <a href="#">
-            <li class="item-nav">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="h-6 w-6 rounded bg-slate-700 stroke-slate-400 p-1">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                </svg>
-                <p class="item-name">Create Playlist</p>
-            </li>
-        </a>
+        <li class="item-nav">
+            <form action="/createPlaylist" method="POST" class="form-album">
+                <div>
+                    <input type="text" name="name" placeholder="Make an new playlist" required>
+                </div>
+                <div>
+                    <input type="hidden" name="user" value="{{users.id}}">
+                </div>
+                <div>
+                    <button title="Add playlist." class="btn_update" type="submit">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="h-6 w-6 rounded bg-slate-700 stroke-slate-400 p-1">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                        </svg>
+                    </button>
+                </div>
+            </form>
+        </li>
         <a href="/likedSongs">
             <li class="item-nav">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -85,10 +127,10 @@
                     <path stroke-linecap="round" stroke-linejoin="round"
                         d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 010 3.75H5.625a1.875 1.875 0 010-3.75z" />
                 </svg>
-                <p class="item-name">Playlist</p>
+                <p class="item-name">Playlists</p>
             </li>
         </a>
-        <a href="/Albums">
+        <a href="/AlbumsAll">
             <li class="item-nav">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
                     stroke-linecap="round" stroke-linejoin="round">
@@ -100,17 +142,47 @@
                 <p class="item-name">Albums</p>
             </li>
         </a>
-    </ul>
-    <ul class="items-col2">
-        <a href="#">
+        <a href="/songsAll">
             <li class="item-nav">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="h-6 w-6 rounded bg-slate-700 stroke-slate-400 p-1">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                <svg width="25px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M6.28016 21.9998C8.00328 21.9998 9.40016 20.6029 9.40016 18.8798C9.40016 17.1566 8.00328 15.7598 6.28016 15.7598C4.55703 15.7598 3.16016 17.1566 3.16016 18.8798C3.16016 20.6029 4.55703 21.9998 6.28016 21.9998Z"
+                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <path
+                        d="M17.7196 19.9202C19.4427 19.9202 20.8396 18.5233 20.8396 16.8002C20.8396 15.077 19.4427 13.6802 17.7196 13.6802C15.9965 13.6802 14.5996 15.077 14.5996 16.8002C14.5996 18.5233 15.9965 19.9202 17.7196 19.9202Z"
+                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <g opacity="0.4">
+                        <path
+                            d="M20.8404 16.8003V4.60034C20.8404 2.00034 19.2104 1.64034 17.5604 2.09034L11.3204 3.79034C10.1804 4.10034 9.40039 5.00034 9.40039 6.30034V8.47034V9.93034V18.8703"
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M9.40039 9.52039L20.8404 6.40039" stroke="currentColor" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round"></path>
+                    </g>
+                    </g>
                 </svg>
-                <p class="item-name">Create Playlist</p>
+                <p class="item-name">Songs</p>
             </li>
         </a>
+    </ul>
+    <ul class="items-col2">
+            <li class="item-nav">
+                <form action="/createPlaylist" method="POST" class="form-album">
+                    <div>
+                        <input type="text" name="name" placeholder="Make an new playlist" required>
+                    </div>
+                    <div>
+                        <input type="hidden" name="user" value="{{users.id}}">
+                    </div>
+                    <div>
+                        <button title="Add playlist." class="btn_update" type="submit">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                class="h-6 w-6 rounded bg-slate-700 stroke-slate-400 p-1">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+            </li>
         <a href="/likedSongs">
             <li class="item-nav">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -120,6 +192,18 @@
                         d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
                 </svg>
                 <p class="item-name">Liked Songs</p>
+            </li>
+        </a>
+        <a href="/Albums">
+            <li class="item-nav">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                    <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                    <circle cx="15.5" cy="8.5" r="1.5"></circle>
+                    <path d="M3 14.5h18"></path>
+                </svg>
+                <p class="item-name">Add Albums</p>
             </li>
         </a>
     </ul>

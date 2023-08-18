@@ -1,25 +1,78 @@
-<h1>{{playlistDetail.name}}
-</h1>
-<section>
-    <ul>
+<div class="album-detail">
+{{> playlist-cover }}
+    <ul  class="album_songs">
     {{#ifEquals user.id playlistDetail.users.id}}
         {{#each playlistDetail.songs}}
+        <div class="song-album_detail">
         <a href="/song/{{ id }}">
         <li>{{name}}</li>
-    <form action="/deleteSongFromPlaylist/{{ id }}" method="post">
-        <input type="hidden" name="_method" value="{{id}}">
-        <button type="submit">Verwijderen uit playlist</button>
-    </form>
+            <form class="formDisplay form-delete" action="/deleteSongFromPlaylist/{{ id }}" method="POST">
+                <input type="hidden" name="_method" value="DELETE">
+                <button title="Delete the song" class="btn-delete" type="submit" value="delete">
+                    <svg class="delete" fill="#c1bdb3" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 408.483 408.483">
+                        <g>
+                            <g>
+                                <path
+                                    d="M87.748,388.784c0.461,11.01,9.521,19.699,20.539,19.699h191.911c11.018,0,20.078-8.689,20.539-19.699l13.705-289.316 H74.043L87.748,388.784z M247.655,171.329c0-4.61,3.738-8.349,8.35-8.349h13.355c4.609,0,8.35,3.738,8.35,8.349v165.293 c0,4.611-3.738,8.349-8.35,8.349h-13.355c-4.61,0-8.35-3.736-8.35-8.349V171.329z M189.216,171.329 c0-4.61,3.738-8.349,8.349-8.349h13.355c4.609,0,8.349,3.738,8.349,8.349v165.293c0,4.611-3.737,8.349-8.349,8.349h-13.355 c-4.61,0-8.349-3.736-8.349-8.349V171.329L189.216,171.329z M130.775,171.329c0-4.61,3.738-8.349,8.349-8.349h13.356 c4.61,0,8.349,3.738,8.349,8.349v165.293c0,4.611-3.738,8.349-8.349,8.349h-13.356c-4.61,0-8.349-3.736-8.349-8.349V171.329z">
+                                </path>
+                                <path
+                                    d="M343.567,21.043h-88.535V4.305c0-2.377-1.927-4.305-4.305-4.305h-92.971c-2.377,0-4.304,1.928-4.304,4.305v16.737H64.916 c-7.125,0-12.9,5.776-12.9,12.901V74.47h304.451V33.944C356.467,26.819,350.692,21.043,343.567,21.043z">
+                                </path>
+                            </g>
+                        </g>
+                        </g>
+                    </svg>
+                </button>
+            </form>
         </a>
+        </div>
         {{/each}}
     </ul>
-        {{else}}
-        <div>
-            {{#each playlistDetail.songs}}
-            <a href="/song/{{ id }}">
-                <li>{{name}}</li>
-            </a>
-            {{/each}}
-        </div>
-        {{/ifEquals}}
-</section>
+    </div>
+    {{else}}
+    <ul>
+        {{#each playlistDetail.songs}}
+        <a class="song-link" href="/song/{{ id }}">
+            <li class="song">
+                <div class="album_info_song">
+                    <div class="album_image_song">
+                        <img class="album_image_song"
+                            src="../images/album/{{artist.firstName}}{{artist.lastName}}{{album.name}}.png" alt="{{album.name}}">
+                    </div>
+                </div>
+                <div class="under_info_song">
+                    <div class="song_info">
+                        <h3>{{name}}</h3>
+                        <p>{{artist.firstName}} {{artist.lastName}}</p>
+                    </div>
+                    <div>
+                        <form action="/removefromfavorites/{{ id }}" method="post">
+                            <input type="hidden" name="_method" value="POST">
+                            <button title="Dislike." type="submit">
+                                <div>
+                                    <div class="like_dislike_buttons">
+                                        <div class="like_button">
+                                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M12 5.50063C7.50016 0.825464 2 4.27416 2 9.1371C2 14 6.01943 16.5914 8.96173 18.9109C10 19.7294 11 20.5 12 20.5"
+                                                    stroke="#847996" stroke-width="1.5" stroke-linecap="round"></path>
+                                                <path opacity="0.2"
+                                                    d="M12 5.50063C16.4998 0.825464 22 4.27416 22 9.1371C22 14 17.9806 16.5914 15.0383 18.9109C14 19.7294 13 20.5 12 20.5"
+                                                    stroke="#330a33" stroke-width="1.5" stroke-linecap="round"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </li>
+        </a>
+        {{/each}}
+        </ul>
+    {{/ifEquals}}
+</div>
+
+

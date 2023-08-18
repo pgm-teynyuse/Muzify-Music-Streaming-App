@@ -36,7 +36,7 @@ export const detailPlaylist = async (req, res) => {
         where: {
             id: playlistId,
         },
-        relations: ['songs', 'users', 'songs.clients']
+        relations: ['songs', 'users', 'songs.clients', 'songs.artist', 'songs.album']
     });
 
     if (playlistData) {

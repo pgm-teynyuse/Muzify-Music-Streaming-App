@@ -1,0 +1,92 @@
+<div class="album-detail">
+{{>user-cover }}
+</div>
+<ul class="album_detailUser"> 
+
+<div class="albums-user">
+    {{#each albums}}
+    <ul>
+        <li class="album"></li>
+        <a class="hoverable-link" href="/album/{{ id }}">
+            <div class="album_info">
+                <div class="album_image">
+                    <img class="album_image" src="../images/album/{{artist.firstName}}{{artist.lastName}}{{name}}.png"
+                        alt="{{name}}">
+                </div>
+            </div>
+            <div class="under_info">
+                <div>
+                    <h3>{{name}}</h3>
+                    <p>{{artist.firstName}} {{artist.lastName}}</p>
+                </div>
+                <div>
+                    <form action="/removefromfavorites/{{ id }}" method="post">
+                        <input type="hidden" name="_method" value="POST">
+                        <button title="Dislike" class="diss_button" type="submit">
+                            <div>
+                                <div class="like_dislike_buttons">
+                                    <div class="like_button">
+                                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M12 5.50063C7.50016 0.825464 2 4.27416 2 9.1371C2 14 6.01943 16.5914 8.96173 18.9109C10 19.7294 11 20.5 12 20.5"
+                                                stroke="#847996" stroke-width="1.5" stroke-linecap="round"></path>
+                                            <path opacity="0.2"
+                                                d="M12 5.50063C16.4998 0.825464 22 4.27416 22 9.1371C22 14 17.9806 16.5914 15.0383 18.9109C14 19.7294 13 20.5 12 20.5"
+                                                stroke="#330a33" stroke-width="1.5" stroke-linecap="round"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </a>
+        </li>
+    </ul>
+    {{/each}}
+</div>
+<div class="fav_group_song">
+    <ul class="songs-detail">
+        {{#each songs}}
+        <a class="song-link" href="/song/{{ id }}">
+            <li class="song">
+                <div class="album_info_song">
+                    <div class="album_image_song">
+                        <img class="album_image_song"
+                            src="../images/album/{{artist.firstName}}{{artist.lastName}}{{album.name}}.png" alt="{{name}}">
+                    </div>
+                </div>
+                <div class="under_info_song">
+                    <div class="song_info">
+                        <h3>{{name}}</h3>
+                        <p>{{artist.firstName}} {{artist.lastName}}</p>
+                    </div>
+                    <div class="like_buttons">
+                        <form action="/addSongtofavorites/{{ id }}" method="post">
+                            <input id="{{ id }}" type="hidden" name="_method" value="POST"></input>
+                            <button title="like" type="submit" value="add">
+                                <div>
+                                    <div class="like_dislike_buttons">
+                                        <div class="like_button">
+                                            <svg viewBox="0 0 24 24" fill="#330a33" xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M12 5.50063C7.50016 0.825464 2 4.27416 2 9.1371C2 14 6.01943 16.5914 8.96173 18.9109C10 19.7294 11 20.5 12 20.5"
+                                                    stroke="#330a33" stroke-linecap="round"></path>
+                                                <path
+                                                    d="M12 5.50063C16.4998 0.825464 22 4.27416 22 9.1371C22 14 17.9806 16.5914 15.0383 18.9109C14 19.7294 13 20.5 12 20.5"
+                                                    stroke="#330a33" stroke-linecap="round"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </li>
+        </a>
+        {{/each}}
+    </ul>
+</div>
+</ul>

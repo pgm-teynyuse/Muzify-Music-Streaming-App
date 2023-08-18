@@ -24,6 +24,25 @@ export const albums = async (req, res) => {
     });
 }
 
+export const albumsAll = async (req, res) => {
+    const userRepository = DataSource.getRepository('User');
+    const users = await userRepository.find();
+    const userId = req.user.id; 
+    
+    const albumRepository = DataSource.getRepository('Album')
+    const albumData = await albumRepository.find({
+        relations:['artist']
+        });
+
+    const albumsAll = albumData;
+    res.render('allAlbums', {
+    user: req.user,
+    albumsAll,
+    users,
+    title: "My Albums"
+    });
+}
+
 export const detailAlbum = async (req, res) => {
     const userRepository = DataSource.getRepository('User');
     const users = await userRepository.find();
@@ -171,7 +190,6 @@ export const updateAlbum = async (req, res, next) => {
   }
 };
 
-
 export const addSong = async (req, res, next) => {
   try {
     const { token } = req.cookies;
@@ -306,7 +324,6 @@ export const deleteSong = async (req, res, next) => {
     next(error);
   }
 };
-
 
 export const updateSong = async (req, res, next) => {
   console.log('Updating song');

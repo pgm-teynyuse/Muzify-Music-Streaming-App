@@ -1,0 +1,106 @@
+.player{
+    position: relative;
+    z-index: 1;
+}
+
+.player-inside{
+    position: absolute;
+    bottom: 0rem;
+    width: 100%;
+    height: 6rem;
+    backdrop-filter: blur(2px);
+    box-shadow: 10px 10px 50px rgba(0, 0, 0, 0.485);
+    background-color: var(--light-black);
+}
+
+.player-items{
+    display: flex;
+    align-items: center;
+    padding: 0.1rem;
+    justify-content: center;
+}
+
+.song-info{
+    margin-top: 0.5rem;
+    display: flex;
+    & .image-song img{
+        width: 5rem;
+    }
+    & .song-about{
+        color: var(--purple);
+        margin-left: 1rem;
+    }
+}
+
+.buttons-player{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0rem 5rem 0rem 5rem;
+        & p{
+            margin-left: 0.5rem;
+            margin-right: 0.5rem;
+            color: var(--purple);
+        }
+    & svg:hover {
+        fill: var(--purple);
+        cursor: pointer;
+    }
+    & div{
+        display: flex;
+        align-items: center;
+    }
+
+    & .progress-balk{
+        margin-top: 0.5rem;
+        width: 35rem;
+        height: 0.2rem;
+        background-color: white;
+
+        & .inner_balk{
+            width: 25%;
+            height: 0.2rem;
+            background-color: var(--purple);
+        }
+    }
+}
+
+.buttons-other{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    & svg{
+        margin-left: 1rem;
+    }
+    
+    & svg:hover {
+        fill: var(--purple);
+        cursor: pointer;
+    }
+    & .items-other{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    & .volume{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-left: 2rem;
+    }
+
+    & .progress-volume{
+        margin-left: 0.5rem;
+        width: 5rem;
+        height: 0.2rem;
+        background-color: white;
+
+        & .inner_volume{
+            width: 25%;
+            height: 0.2rem;
+            background-color: var(--purple);
+        }
+    }
+}

@@ -6,7 +6,9 @@ export const discover = async (req, res) => {
   const songRepository = DataSource.getRepository('Song');
   const playlistRepository = DataSource.getRepository('Playlist');
   const userId = req.user.id;
+  
   const roleId = 3
+  const artistId = 2
 
   try {
     const users = await userRepository.find();
@@ -28,9 +30,16 @@ export const discover = async (req, res) => {
       take: 10,
     });
 
+    const artistsAll = await userRepository.find({
+      where:{
+        role: {id:artistId}
+      }
+    })
+
     const albumsAll = albumDataAll;
     const songsAll = songDataAll;
     const playlists = playlistDataAll;
+    const artists = artistsAll;
 
     // Randomly shuffle the albums and songs arrays
     shuffleArray(albumsAll);
@@ -44,6 +53,7 @@ console.log(playlists)
       albumsAll,
       songsAll,
       playlists,
+      artists,
       layout: 'main',
       title: 'Discover',
     });

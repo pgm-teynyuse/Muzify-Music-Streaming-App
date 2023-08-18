@@ -19,7 +19,7 @@
     --background: linear-gradient(120deg, #1db954, #191414);
 
     --light-green: #a7cab1;
-    --purple: hsl(263, 12%, 53%);
+    --purple: #847996;
     --dark-purple: #330a33;
     --black: hsl(0, 0%, 0%);
 
@@ -38,6 +38,8 @@ body{
     font-family: 'Inter';
     background:linear-gradient(var(--light-black), var(--black));    
     height: 100%;
+    overflow-y: hidden;
+    overflow-x: hidden;
 }
 
 section{
@@ -118,7 +120,7 @@ button:hover{
 .btn-add{
     position: absolute;
     color: white;
-    top: 12.5rem;
+    top: 9.5rem;
     background-color: var(--purple);
     right: 5rem;
     width: 15rem;
@@ -128,16 +130,14 @@ button:hover{
     }
 }
 
+.btn-add-playlist{
+    color: white;
+    background-color: var(--purple);
+}
+
 .btn-album{
     width: 15rem;
 }
-
-
-
-
-
-
-
 
 
 /*Navigation Reader*/
@@ -253,6 +253,7 @@ button:hover{
     display: flex;
     align-items: center;
     padding: 0.4rem;
+    width: 15rem;
     transition: all 0.3s ease;
     & .song{
         display: flex;
@@ -319,6 +320,10 @@ button:hover{
     }
 }
 
+.popular_playlist{
+    background-color: #1db954;
+    }
+
 /*Album detail header*/
 
 .header-image{
@@ -345,12 +350,65 @@ button:hover{
 .album_songs {
     margin-top: 18rem;
     padding-left: 3rem;
-    height: 35rem;
-    width: 116.4rem;
+    height: 25rem;
+    width: 35rem;
     overflow-x: hidden;
     overflow-y: scroll;
     margin-bottom: 1rem;
-      background: -webkit-linear-gradient(90deg, rgba(0, 0, 0, 0.15), transparent);
+    background: -webkit-linear-gradient(90deg, rgba(0, 0, 0, 0.15), transparent);
+}
+
+.album_detailUser{
+    display: flex;
+    margin-top: 18rem;
+    padding-left: 3rem;
+    height: 25rem;
+    margin-bottom: 1rem;
+}
+
+.albums-user{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.fav_group_song{
+    height: 30rem;
+    width: 32rem;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.fav_group_songAll{
+    height: 48rem;
+    width: 90rem;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.fav_group_songAll::-webkit-scrollbar {
+    width: 5px; 
+}
+
+.fav_group_songAll::-webkit-scrollbar-thumb {
+    background-color: var(--beige);
+    border-radius: 5px; 
+}
+
+.fav_group_songAll::-webkit-scrollbar-track {
+    background-color: var(--black);
+}
+
+.fav_group_song::-webkit-scrollbar {
+    width: 5px; 
+}
+
+.fav_group_song::-webkit-scrollbar-thumb {
+    background-color: var(--beige);
+    border-radius: 5px; 
+}
+
+.fav_group_song::-webkit-scrollbar-track {
+    background-color: var(--black);
 }
 
 .album_songs::-webkit-scrollbar {
@@ -443,7 +501,7 @@ button:hover{
     }
 
     & p{
-        margin-top: 0.5rem;
+        margin-top: -0.4rem;
         margin-left: 0.5rem;
         color: var(--purple);
     }
@@ -451,6 +509,21 @@ button:hover{
     & h2{
         margin-top: -1rem;
         margin-left: 0.5rem;
+    }
+}
+
+.form-album{
+    display: flex;
+    align-items: center;
+}
+
+.albumArtist-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    & .labelAlbum{
+        color:black;
     }
 }
 
@@ -473,7 +546,7 @@ button:hover{
 }
 
 label{
-    color: white;
+    color: rgb(255, 255, 255);
 }
 
 .edit_update{
@@ -484,6 +557,22 @@ label{
     margin: 1rem;
 }
 
+.user-artist{
+    display: flex;
+    margin-top: 5rem;
+}
+
+.songs-detail{
+    margin-left: 6rem;
+}
+
+.artists{
+    margin-left: 5rem;
+}
+
+.artists-link li{
+    margin-bottom: 1rem;
+}
 
 
 

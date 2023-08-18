@@ -82,8 +82,8 @@
 .side-nav{
     background-color: var(--light-black);
     padding: 0.5rem;
-    width: 15%;
-    height: 90vh;
+    width: 18%;
+    height: 92.5vh;
     margin-top: 4rem;
     & a{
         color: var(--purple);
@@ -128,7 +128,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 15%;
+    width: 18%;
     height: 4rem;
     background-color: var(--light-black);
     z-index: -1;

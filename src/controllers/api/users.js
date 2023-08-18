@@ -41,3 +41,50 @@ export const getUser = async (req, res, next) => {
   }
 };
 
+export const userDetail = async (req, res) => {
+    const userRepository = DataSource.getRepository('User');
+    const userId = req.params.id; 
+
+    const users = await userRepository.find();
+
+    const albumRepository = DataSource.getRepository('Album');
+    const songRepository = DataSource.getRepository('Song');
+    
+    const userData = await userRepository.findOne({
+        where: {
+            id: userId,
+        }
+    });
+
+    const artistAlbums = await albumRepository.find({
+      where:{
+        artist:{id: userId}
+      },
+      relations:['artist'],
+    })
+
+    const artistSongs = await songRepository.find({
+      where:{
+        artist:{id: userId}
+      },
+      relations:['artist','album'],
+    })
+
+    if (userData) {
+        const users = userData;
+        const albums = artistAlbums;
+        const songs = artistSongs;
+        console.log(artistAlbums)
+        
+        res.render('artist-detail', {
+            user: req.user,
+            userData,
+            albums,
+            songs,
+            users,
+        });
+    } else {
+        res.status(404).send('Album not found');
+    }
+}
+
