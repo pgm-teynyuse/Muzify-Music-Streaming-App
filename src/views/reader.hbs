@@ -1,1 +1,49 @@
-<h1>Reader</h1>
+<div class="reader-section">
+    <div class="reader-inner">
+    {{> reader-banner }}
+    <h1>Listen to songs</h1>
+        <div class="reader-songs">
+        {{#each songsAll}}
+            <a class="song-link" href="/song/{{ id }}">
+                <li class="song">
+                    <div class="album_info_song">
+                        <div class="album_image_song">
+                            <img class="album_image_song"
+                                src="images/album/{{artist.firstName}}{{artist.lastName}}{{album.name}}.png" alt="{{name}}">
+                        </div>
+                    </div>
+                    <div class="under_info_song">
+                        <div class="song_info">
+                            <h3>{{name}}</h3>
+                            <p>{{artist.firstName}} {{artist.lastName}}</p>
+                        </div>
+                    </div>
+                </li>
+            </a>
+        {{/each}}
+        </div>
+    <h1>Albums</h1>
+    <div class="reader-songs">
+        {{#each albumsAll}}
+        <ul class="album_cover">
+            <li class="album"></li>
+            <a class="hoverable-link" href="/album/{{ id }}">
+                <div class="album_info">
+                    <div class="album_image">
+                        <img class="album_image" src="images/album/{{artist.firstName}}{{artist.lastName}}{{name}}.png"
+                            alt="{{name}}">
+                    </div>
+                </div>
+                <div class="under_info">
+                    <div>
+                        <h3>{{name}}</h3>
+                        <h4>{{artist.firstName}} {{artist.lastName}}</h4>
+                        <p>{{genre}}</p>
+                    </div>
+                </div>
+            </a>
+            </li>
+        </ul>
+        {{/each}}
+    </div>
+</div>

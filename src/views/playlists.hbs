@@ -10,7 +10,7 @@
                         <li class="formOfAlbum">
                             <div class="cover_album">
                                 <img class="coverOfAlbum"
-                                    src="images/playlist.png" alt="{{name}}">
+                                    src="images/{{name}}{{id}}.png" alt="{{name}}">
                             </div>
                         </li>
                     </a>
@@ -47,6 +47,18 @@
                         </button>
                     </form>
                 </div>
+            <div class="upload_avatar">
+                <form method="post" id="uploadForm-{{id}}" class="upload-form" action="/playlistAvatar" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="avatar-{{id}}" class="upload-file-label">
+                            <h3>Chose a album cover:</h3>
+                        </label>
+                        <input id="avatar-{{id}}" class="upload-input" type="file" name="avatar">
+                        <input type="hidden" name="playlistId" value="{{id}}">
+                    </div>
+                    <button type="submit" class="button-6 upload-button" role="button">Upload</button>
+                </form>
+            </div>
                 {{/each}}
             </ul>
         </div>

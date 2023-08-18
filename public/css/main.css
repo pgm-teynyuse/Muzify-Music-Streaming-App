@@ -117,6 +117,7 @@ button:hover{
     background-color: var(--red);
 }
 
+
 .btn-add{
     position: absolute;
     color: white;
@@ -136,7 +137,13 @@ button:hover{
 }
 
 .btn-album{
-    width: 15rem;
+    margin: 1rem;
+}
+
+.button_view{
+    & a{
+        color: white;
+    }
 }
 
 
@@ -355,7 +362,6 @@ button:hover{
     overflow-x: hidden;
     overflow-y: scroll;
     margin-bottom: 1rem;
-    background: -webkit-linear-gradient(90deg, rgba(0, 0, 0, 0.15), transparent);
 }
 
 .album_detailUser{
@@ -385,44 +391,22 @@ button:hover{
     overflow-y: scroll;
 }
 
+
 .fav_group_songAll::-webkit-scrollbar {
-    width: 5px; 
-}
-
-.fav_group_songAll::-webkit-scrollbar-thumb {
-    background-color: var(--beige);
-    border-radius: 5px; 
-}
-
-.fav_group_songAll::-webkit-scrollbar-track {
-    background-color: var(--black);
+    width: 0.5em;
+    display: none;
 }
 
 .fav_group_song::-webkit-scrollbar {
-    width: 5px; 
-}
-
-.fav_group_song::-webkit-scrollbar-thumb {
-    background-color: var(--beige);
-    border-radius: 5px; 
-}
-
-.fav_group_song::-webkit-scrollbar-track {
-    background-color: var(--black);
+    width: 0.5em;
+    display: none;
 }
 
 .album_songs::-webkit-scrollbar {
-    width: 5px; 
+    width: 0.5em;
+    display: none;
 }
 
-.album_songs::-webkit-scrollbar-thumb {
-    background-color: var(--beige);
-    border-radius: 5px; 
-}
-
-.album_songs::-webkit-scrollbar-track {
-    background-color: var(--black);
-}
 
 .song-album_detail{
     display: flex;
@@ -562,9 +546,6 @@ label{
     margin-top: 5rem;
 }
 
-.songs-detail{
-    margin-left: 6rem;
-}
 
 .artists{
     margin-left: 5rem;
@@ -574,9 +555,125 @@ label{
     margin-bottom: 1rem;
 }
 
+.buttons-fly{
+    right: 3rem;
+    position: absolute;
+    top: 9.5rem;
+}
 
+.container{
+    margin-top: 18rem;
+    margin-left: 3rem;
+}
 
+.content{
+    margin-top: 3rem;
+    margin-left: 2rem;
+}
 
+.links_song{
+    display: flex;
+    flex-direction: column;
+    & a{
+        text-transform: uppercase;
+        font-weight: 600;
+
+    }
+}
+
+/*Reader*/
+
+.reader-section{
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    
+    & .reader-inner{
+    }
+}
+
+.reader-songs{
+    display: flex;
+    flex-wrap: wrap;
+    width: 105rem;
+    margin: 0 auto;
+
+    & a{
+        z-index: 1;
+        margin-right: 5rem;
+
+    }
+}
+
+.reader-section::-webkit-scrollbar {
+    width: 5px; 
+}
+
+.reader-section::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+
+.reader-section::-webkit-scrollbar-thumb {
+    background: var(--light-black); 
+    border-radius: 10px; 
+}
+
+.banner{
+    width: 100vw;
+    height: 20rem;
+    background-color: #191414;
+    overflow: hidden;
+    box-shadow:inset 0 0 40px #000,
+        inset 0 0 120px #111,
+        inset 0 0 180px #000;
+
+    & .banner-image img{
+        width:100%;
+    }
+}
+
+.content-albums{
+    display: flex;
+    flex-wrap: wrap;
+    width: 50rem;
+}
+
+.cover-item{
+    width: 10rem;
+}
+
+.container-add-album{
+    width: 100vw;
+    height: 100vh;
+    margin-top: 1rem;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.container-add{
+    margin: 2rem;
+    width: 75rem;
+}
+
+.item-album {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.label-album-edit{
+    margin-left: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.upload_avatar{
+    background-color: var(--light-black);
+    padding: 1rem;
+    border: 1px solid var(--purple);
+    border-radius: 1rem;
+}
 
 
 

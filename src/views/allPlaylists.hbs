@@ -1,0 +1,20 @@
+ <div class="content">
+<h2>Playlists</h2>   
+    <div class="allPlaylists">
+        <div class="fav_group_songAll">
+            <ul>
+                {{#each playlistsAll}}
+                    <a class="popular_playlist" href="playlist/{{id}}">
+                        <li>
+                            <img src="images/{{name}}{{id}}.png" alt="">
+                            <div class="playlist-info">
+                                <h3>{{name}}</h3>
+                                <p>{{users.firstName}} {{users.lastName}}</p>
+                            </div>
+                        </li>
+                    </a>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+</div>

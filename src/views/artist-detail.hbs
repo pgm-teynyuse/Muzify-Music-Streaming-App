@@ -1,8 +1,22 @@
 <div class="album-detail">
 {{>user-cover }}
 </div>
-<ul class="album_detailUser"> 
-
+<div class="album_detailUser"> 
+<div class="popPlays">
+    <ul>
+        {{#each playlists}}
+        <a class="popular_playlist" href="playlist/{{id}}">
+            <li>
+                <img src="../images/playlist.png" alt="">
+                <div class="playlist-info">
+                    <h3>{{name}}</h3>
+                    <p>{{users.firstName}} {{users.lastName}}</p>
+                </div>
+            </li>
+        </a>
+        {{/each}}
+    </ul>
+</div>
 <div class="albums-user">
     {{#each albums}}
     <ul>

@@ -1,17 +1,72 @@
-<section>
-    <div class="songDetail">
-        <h2>{{songsDetail.name}}</h2>
-        <p>{{songsDetail.artist.firstName}} {{songsDetail.artist.lastName}}</p>
-        <a href="/album/{{songsDetail.album.id}}">{{songsDetail.album.name}}</a>
+<div class="album-detail">
+{{> song-cover }}
+<div class="container">
+    <div class="links_song">
+        <a href="../artist/{{songsDetail.artist.id}}">See the artist</a>
+        <a href="/album/{{songsDetail.album.id}}">View the album</a>
     </div>
-<form action="/toPlaylist/{{songsDetail.id}}" method="post">
-    <input type="hidden" name="songId" value="{{songsDetail.id}}">
-    <label for="playlistId">Select Playlist:</label>
-    <select name="playlistId" id="playlistId">
-        {{#each playlists}}
-        <option value="{{id}}">{{name}}</option>
+    <div>
+        <h2>More from the album "{{songsDetail.album.name}}"</h2>
+        <ul>
+        {{#each songsFromAlbum.songs}}
+                        <a class="song-link" href="/song/{{ id }}">
+                            <li class="song">
+                                <div class="album_info_song">
+                                    <div class="album_image_song">
+                                        <img class="album_image_song"
+                                            src="../images/album/{{artist.firstName}}{{artist.lastName}}{{album.name}}.png" alt="{{album.name}}">
+                                    </div>
+                                </div>
+                                <div class="under_info_song">
+                                    <div class="song_info">
+                                        <h3>{{name}}</h3>
+                                        <p>{{artist.firstName}} {{artist.lastName}}</p>
+                                    </div>
+                                    <div class="like_buttons">
+                                        <form action="/addSongtofavorites/{{ id }}" method="post">
+                                            <input id="{{ id }}" type="hidden" name="_method" value="POST"></input>
+                                            <button title="like" type="submit" value="add">
+                                                <div>
+                                                    <div class="like_dislike_buttons">
+                                                        <div class="like_button">
+                                                            <svg viewBox="0 0 24 24" fill="#330a33" xmlns="http://www.w3.org/2000/svg">
+                                                                <path
+                                                                    d="M12 5.50063C7.50016 0.825464 2 4.27416 2 9.1371C2 14 6.01943 16.5914 8.96173 18.9109C10 19.7294 11 20.5 12 20.5"
+                                                                    stroke="#330a33" stroke-linecap="round"></path>
+                                                                <path
+                                                                    d="M12 5.50063C16.4998 0.825464 22 4.27416 22 9.1371C22 14 17.9806 16.5914 15.0383 18.9109C14 19.7294 13 20.5 12 20.5"
+                                                                    stroke="#330a33" stroke-linecap="round"></path>
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </li>
+                        </a>
         {{/each}}
-    </select>
-    <button type="submit">Add to Playlist</button>
-</form>
-</section>
+        </ul>
+    </div>
+</div>
+    <div class="buttons-fly">
+        <button class="btn-add-playlist" id="showOverlayBtn">
+            Add to playlist
+        </button>
+    </div>
+    <div id="overlay" class="overlay">
+        <div class="overlay-content">
+            <form action="/toPlaylist/{{songsDetail.id}}" method="post">
+                <input type="hidden" name="songId" value="{{songsDetail.id}}">
+                <select name="playlistId" id="playlistId" required>
+                    <option disabled selected>Selecteer playlist...</option>
+                    {{#each playlists}}
+                    <option value="{{id}}">{{name}}</option>
+                    {{/each}}
+                </select>
+                <button type="submit">Add to Playlist</button>
+            </form>
+        </div>
+    </div>
+</div>

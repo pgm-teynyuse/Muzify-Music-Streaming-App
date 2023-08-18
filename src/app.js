@@ -2,12 +2,20 @@ import express from 'express';
 import dotenv from 'dotenv';
 import { create } from 'express-handlebars';
 import cookieParser from 'cookie-parser';
+	
+import multer from "multer";
+import swaggerUi from 'swagger-ui-express';
+import { saveAvatar } from "./middleware/saveAvatar.js";
+import { playlistAvatar } from "./middleware/playlistAvatar.js";
+
 import bodyParser from 'body-parser';
 import HandlebarsHelpers from './lib/HandlebarsHelpers.js';
 import { VIEWS_PATH } from './consts.js';
 import DataSource from './lib/DataSource.js';
 
 import { home } from './controllers/home.js';
+import swaggerDefinition from './docs/swagger.js';
+
 import { reader } from './controllers/reader.js';
 import { discover, addAlbumToFavorites, removeAlbumFromFavorites, addSongToFavorites, removeSongFromFavorites} from './controllers/discover.js';
 
@@ -15,7 +23,7 @@ import { discover, addAlbumToFavorites, removeAlbumFromFavorites, addSongToFavor
 import { albums, albumsAll, detailAlbum, createAlbum, deleteAlbum, updateAlbum, addSong, updateSong, deleteSong } from './controllers/albums.js';
 
 // Playlist
-import { playlists, detailPlaylist, createPlaylist, updatePlaylist, deletePlaylist, removeSongFromPlaylist } from './controllers/playlist.js';
+import { playlists, playlistsAll, detailPlaylist, createPlaylist, updatePlaylist, deletePlaylist, removeSongFromPlaylist  } from './controllers/playlist.js';
 
 // Song
 import { songsAll, detailSong, addSongToPlaylist, likedSongs  } from './controllers/song.js';
@@ -25,6 +33,7 @@ import {
   getUsers,
   getUser,
   userDetail,
+  users,
 } from './controllers/api/users.js';
 
 // Import authentication
@@ -55,6 +64,10 @@ const hbs = create({
   helpers: HandlebarsHelpers,
   extname: 'hbs',
 });
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDefinition));
+app.use(cookieParser());
+
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 app.set('views', VIEWS_PATH);
@@ -73,15 +86,17 @@ app.post('/removeSongfromfavorites/:id', jwtAuth,removeSongFromFavorites);
 
 app.get('/albumsAll', jwtAuth, albumsAll);
 app.get('/songsAll', jwtAuth, songsAll);
+app.get('/playlistsAll', jwtAuth, playlistsAll);
+app.get('/users', jwtAuth, users);
 
 // Playlist
 app.get('/playlists', jwtAuth, playlists);
-app.get('/playlist/:id', jwtAuth, detailPlaylist);
+app.get('/playlist/:id', jwtAuth, detailPlaylist, removeSongFromPlaylist);
 app.post('/createPlaylist', jwtAuth, createPlaylist);
 app.post('/removePlaylist/:id', jwtAuth, deletePlaylist); 
 app.post('/updatePlaylist/:id', jwtAuth, updatePlaylist); 
 
-app.post('/deleteSongFromPlaylist/:id', jwtAuth, removeSongFromPlaylist);
+app.post('/removeSong/:id', jwtAuth, removeSongFromPlaylist);
 
 // Artist
 app.get('/albums', jwtAuth, albums);
@@ -102,7 +117,13 @@ app.post('/toPlaylist/:id', jwtAuth, addSongToPlaylist);
 // User 
 app.get('/artist/:id', jwtAuth, userDetail);
 
+app.post('/uploadAvatar', multer().single('avatar'), saveAvatar, (req, res) => {
+  res.redirect('/albums')
+});
 
+app.post('/playlistAvatar', multer().single('avatar'), playlistAvatar, (req, res) => {
+  res.redirect('/playlists')
+});
 
 // Login and Register
 app.get('/login', login);

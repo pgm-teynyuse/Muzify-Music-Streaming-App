@@ -26,13 +26,7 @@ export const home = async (req, res) => {
     const songs = songData;
 
   if (req.user) {
-    if (userRole === 'Admin') {
-      res.render('admin', {
-        user: req.user,
-        users,
-        title: "Home"
-      });
-    } else if (userRole === 'Client') {
+    } if (userRole === 'Client') {
       res.render('home', {
         user: req.user,
         albums,
@@ -49,5 +43,4 @@ export const home = async (req, res) => {
         title: "Home"
       });
     }
-  }
 };

@@ -1,17 +1,34 @@
 import DataSource from '../lib/DataSource.js';
+import { Not } from 'typeorm';
 import jwt from 'jsonwebtoken';
 
 export const detailSong = async (req, res) => {
     const songId = req.params.id; 
     const userId = req.user.id; 
+    const albumId = req.body.id; 
     
-    const songRepository = DataSource.getRepository('Song')
+    const albumRepository = DataSource.getRepository('Album');
+    const songRepository = DataSource.getRepository('Song');
+    
     const songData = await songRepository.findOne({
         where: {
             id: songId,
         },
         relations: ['artist', 'album']
     });
+
+    const songsFromAlbum = await albumRepository.findOne({
+        where: {
+            id: songData.album.id,
+        },
+        take: 3,
+        relations:['songs','songs.artist', 'songs.album']
+    });
+
+    if (songsFromAlbum && songsFromAlbum.songs) {
+    const limitedSongs = songsFromAlbum.songs.slice(0, 3);
+    songsFromAlbum.songs = limitedSongs;
+}
 
     const playlistRepository = DataSource.getRepository('Playlist');
     const playlists = await playlistRepository.find({
@@ -20,13 +37,12 @@ export const detailSong = async (req, res) => {
         }
     });
 
-    const songsDetail = songData;
-    console.log(playlists);
-
-    const songTitle = songsDetail.name; 
+console.log(songId)
+    const songTitle = songData.name; 
     res.render('song-detail', {
         user: req.user,
-        songsDetail,
+        songsDetail: songData,
+        songsFromAlbum: songsFromAlbum,
         playlists,
         title: songTitle, 
     });
@@ -42,11 +58,18 @@ export const songsAll = async (req, res) => {
       relations: ['artist', 'album'],
     });
 
+    const playlistRepository = DataSource.getRepository('Playlist');
+    const playlists = await playlistRepository.find({
+        where: {
+            users: { id: userId },
+        }
+    });
     const songsAll = songDataAll;
     res.render('allSongs', {
     user: req.user,
     songsAll,
     users,
+    playlists,
     title: "My Albums"
     });
 }
@@ -126,6 +149,8 @@ export const likedSongs = async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 };
+
+
 
 
 

@@ -1,0 +1,19 @@
+<div class="content">
+    <h2>Users</h2>
+    <ul>
+        {{#each userData}}
+        <a class="artists-link" href="/artist/{{id}}">
+            <li>
+                <div class="auth-user">
+                    <div class="user-pic">
+                        <img src="/images/{{firstName}}.jpg" alt="">
+                    </div>
+                    <div class="user-info">
+                        <h3>{{firstName}} {{lastName}}</h3>
+                    </div>
+                </div>
+            </li>
+        </a>
+        {{/each}}
+    </ul>
+</div>

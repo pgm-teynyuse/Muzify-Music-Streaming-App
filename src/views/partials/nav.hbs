@@ -11,9 +11,11 @@
             <div class="user-pic">
                 <img src="/images/{{user.firstName}}.jpg" alt="">
             </div>
+            <a href="../artist/{{user.id}}">
             <div class="user-info">
                 <h3>{{user.firstName}} {{user.lastName}}</h3>
             </div>
+            </a>
         </div>
         <div class="log_reg">
             <form class="button" action="/logout" method="post">

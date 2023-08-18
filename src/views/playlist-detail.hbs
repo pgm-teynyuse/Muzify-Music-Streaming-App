@@ -6,7 +6,7 @@
         <div class="song-album_detail">
         <a href="/song/{{ id }}">
         <li>{{name}}</li>
-            <form class="formDisplay form-delete" action="/deleteSongFromPlaylist/{{ id }}" method="POST">
+            <form class="formDisplay form-delete" action="/removeSong/{{ id }}" method="POST">
                 <input type="hidden" name="_method" value="DELETE">
                 <button title="Delete the song" class="btn-delete" type="submit" value="delete">
                     <svg class="delete" fill="#c1bdb3" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
