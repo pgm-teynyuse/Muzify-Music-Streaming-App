@@ -15,7 +15,7 @@ export default {
   },
   servers: [
     {
-      url: 'http://localhost:8080',
+      url: 'http://localhost:8060/api/',
       description: 'This is the development server',
     },
   ],

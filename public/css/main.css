@@ -590,6 +590,7 @@ label{
     overflow-y: scroll;
     
     & .reader-inner{
+        height: 120rem;
     }
 }
 

@@ -1,126 +1,101 @@
 /* eslint-disable prettier/prettier */
-export default {
-User: {
+export default { 
+    User: {
     properties: {
-    id: { type: "number" },
-    firstname: { type: "string" },
-    lastname: { type: "string" },
-    role: {
-    $ref: "#/components/schemes/Role",
+        id: { type: "number" },
+        firstName: { type: "string" },
+        lastName: { type: "string" },
+        role: {
+        $ref: "#/components/schemas/Role",
+        },
+        email: { type: "string" },
+        userName: { type: "string" },
+        password: { type: "string" },
     },
-    email: { type: "string" },
-    username: { type: "string" },
-    password: { type: "string" },
-    age: { type: "number", nullable: true },
-    phone: { type: "number", nullable: true },
-    address: { type: "string", nullable: true },
-    country: { type: "string", nullable: true },
-    city: { type: "string", nullable: true },
-    gender: { type: "string", nullable: true },
-    level: { type: "string", nullable: true },
-},
-example: {
-    firstname: "John",
-    lastname: "Doe",
-    user_meta: {
-    address: "123 Main St",
-    zipCode: "12345",
-    city: "New York",
-    },
-    role: {
-    name: "admin",
-    },
-    email: "john.doe@example.com",
-    username: "johndoe",
-    password: "password123",
-    age: 30,
-    phone: 1234567890,
-    address: "123 Main St",
-    country: "USA",
-    city: "New York",
-    gender: "male",
-    level: "1",
-},
-},
-Feedback: {
-properties: {
-    id: { type: "number" },
-    text: { type: "string" },
-    users: {
-    $ref: "#/components/schemas/User",
-    },
-    subjects: {
-    $ref: "#/components/schemas/Subject",
-    },
-    teacher: {
-    $ref: "#/components/schemas/User",
-    },
-    student: {
-    $ref: "#/components/schemas/User",
-    },
-},
-example: {
-    text: "This is a feedback",
-    users: {
-    id: 1,
-    firstname: "John",
-    lastname: "Doe",
-    role: {
+    example: {
+        firstName: "John",
+        lastName: "Doe",
+        user_meta: {
+        address: "123 Main St",
+        zipCode: "12345",
+        city: "New York",
+        },
+        role: {
         name: "admin",
-    },
-    email: "john.doe@example.com",
-    username: "johndoe",
-    password: "password123",
-    age: 30,
-    phone: 1234567890,
-    address: "123 Main St",
-    country: "USA",
-    city: "New York",
-    gender: "male",
-    level: "advanced",
-    },
-    subjects: {
-    id: 1,
-    name: "Math",
-    description: "Mathematics subject",
-    },
-    teacher: {
-    id: 2,
-    firstname: "Jane",
-    lastname: "Smith",
-    role: {
-        name: "teacher",
-    },
-    email: "jane.smith@example.com",
-    username: "janesmith",
-    password: "password456",
-    age: 35,
-    phone: 9876543210,
-    address: "456 Elm St",
-    country: "USA",
-    city: "Los Angeles",
-    gender: "female",
-    level: "intermediate",
-    },
-    student: {
-    id: 3,
-    firstname: "Bob",
-    lastname: "Johnson",
-    role: {
-        name: "student",
-    },
-    email: "bob.johnson@example.com",
-    username: "bobjohnson",
-    password: "password789",
-    age: 25,
-    phone: 5432167890,
-    address: "789 Oak St",
-    country: "USA",
-    city: "Chicago",
-    gender: "male",
-    level: "beginner",
+        },
+        email: "john.doe@example.com",
+        userName: "johndoe",
+        password: "password123",
     },
     },
-},
+    Album: {
+    properties: {
+        id: { type: "number" },
+        name: { type: "string" },
+        genre: { type: "string" },
+        artist: {
+        $ref: "#/components/schemas/User",
+        },
+        songs: {
+        $ref: "#/components/schemas/Song",
+        },
+        clients: {
+        $ref: "#/components/schemas/User",
+        },
+    },
+    example: {
+        id: 1,
+        name: "Playlist",
+        artist: {},
+        songs: {},
+        clients: {},
+    },
+    },
+    Playlist: {
+    properties: {
+        id: { type: "number" },
+        name: { type: "string" },
+        users: {
+        $ref: "#/components/schemas/User",
+        },
+        songs: {
+        $ref: "#/components/schemas/Song",
+        },
+    },
+    example: {
+        id: 1,
+        name: "Playlist",
+        users: {},
+        songs: {},
+    },
+    },
+    Playlist: {
+    properties: {
+        id: { type: "number" },
+        name: { type: "string" },
+        artist: {
+        $ref: "#/components/schemas/User",
+        },
+        songs: {
+        $ref: "#/components/schemas/Song",
+        },
+        album: {
+        $ref: "#/components/schemas/Album",
+        },
+        playlists: {
+        $ref: "#/components/schemas/Playlist",
+        },
+        clients: {
+        $ref: "#/components/schemas/User",
+        },
+    },
+    example: {
+        id: 1,
+        name: "Song",
+        artist: {},
+        album: {},
+        clients: {},
+        playlists: {},
+    },
+    },
 };
-

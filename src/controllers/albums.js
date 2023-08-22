@@ -258,8 +258,8 @@ export const addSong = async (req, res, next) => {
     const createdSong = await songRepository.create(req.body);
     const savedSong = await songRepository.save(createdSong);
 
-    console.log('Redirecting to albumId:', albumId);
-    res.status(200).redirect(`/albums`);
+    console.log('Redirecting to albumId:', album.id);
+    res.status(200).redirect(`/album/${album.id}`);
   } catch (error) {
     next(error.message);
   }

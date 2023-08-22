@@ -74,7 +74,7 @@ app.set('views', VIEWS_PATH);
 
 // Reader
 app.get('/reader', reader); 
-app.get('/', jwtAuth, home);
+app.get('/', jwtAuth, home, removeSongFromFavorites, removeAlbumFromFavorites);
 app.get('/reader', reader);
 
 // Client

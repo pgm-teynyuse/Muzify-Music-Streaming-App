@@ -1,9 +1,13 @@
 /* eslint-disable prettier/prettier */
 import Users from "./users.js";
-import Feedback from "./feedback.js";
+import Album from "./album.js";
+import Playlist from "./playlist.js";
+import Song from "./song.js";
 
 
 export default {
   ...Users,
-  ...Feedback
+  ...Album,
+  ...Playlist,
+  ...Song,
 };

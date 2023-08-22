@@ -163,7 +163,7 @@ export const removeSongFromFavorites = async (req, res) => {
       if (user) {
         song.clients = song.clients.filter(client => client.id !== userId);
         await songRepository.save(song);
-        res.redirect('/discover');
+        res.redirect('/likedSongs');
       } else {
         res.status(404).json({ success: false, message: 'User not found' });
       }
