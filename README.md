@@ -28,10 +28,7 @@ Artiesten die hun muziek aan de app willen toevoegen, kunnen contact opnemen met
 
 ## TypeORM
 
-De app maakt gebruik van [TypeORM](https://typeorm.io/) voor database-interactie. Zorg ervoor dat je de TypeORM-configuratie correct hebt ingesteld volgens de documentatie om met de database te werken.
+De app maakt gebruik van [TypeORM](https://typeorm.io/) voor database-interactie. 
 
-## Handlebars
-
-[Handlebars](https://handlebarsjs.com/) wordt gebruikt voor het renderen van webpagina's in de app. Zorg ervoor dat je de Handlebars-templates en views op de juiste manier hebt geïntegreerd voor een soepele gebruikerservaring.
-
+[Handlebars](https://handlebarsjs.com/) wordt gebruikt voor het renderen van webpagina's in de app. 
 
